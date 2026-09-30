@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Copy, Check, Mail, Send, MessageSquare } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
+import { sound } from "@/lib/sound";
 
 export function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -11,6 +12,7 @@ export function ContactSection() {
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(email);
+    sound.playSuccess();
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };

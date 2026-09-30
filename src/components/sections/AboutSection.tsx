@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { Cpu, GraduationCap, Layout, Compass } from "lucide-react";
+import { AutomationFlowVisualizer } from "@/components/ui/AutomationFlowVisualizer";
 
 export function AboutSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -103,7 +104,9 @@ export function AboutSection() {
           </p>
         </div>
       </div>
+
+      {/* Visualizador Arquitetural Interativo "Chão de Fábrica ➔ Cloud" */}
+      <AutomationFlowVisualizer />
     </section>
   );
 }
-

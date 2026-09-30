@@ -5,6 +5,9 @@ import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvide
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { SoundToggle } from "@/components/ui/SoundToggle";
+import { CircuitScrollLine } from "@/components/ui/CircuitScrollLine";
+import { CommandPalette } from "@/components/ui/CommandPalette";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,10 +57,13 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100 selection:bg-emerald-500/30 selection:text-white">
         <SmoothScrollProvider>
-          <CustomCursor />
+          <CircuitScrollLine />
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
+          <SoundToggle />
+          <CommandPalette />
+          <CustomCursor />
         </SmoothScrollProvider>
       </body>
     </html>

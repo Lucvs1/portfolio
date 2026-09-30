@@ -76,9 +76,19 @@ html.lenis body {
   color: #ffffff;
 }
 
-/* Custom Cursor Context Styles */
+/* Custom Cursor: Oculta o cursor nativo do SO no desktop para manter apenas o cursor fluido */
 @media (pointer: fine) {
-  [data-cursor="project"] {
-    cursor: pointer;
+  *, *::before, *::after {
+    cursor: none !important;
   }
+}
+
+.custom-cursor-dot {
+  z-index: 9999999 !important;
+  pointer-events: none !important;
+}
+
+.custom-cursor-follower {
+  z-index: 9999998 !important;
+  pointer-events: none !important;
 }
