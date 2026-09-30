@@ -92,3 +92,65 @@ html.lenis body {
   z-index: 9999998 !important;
   pointer-events: none !important;
 }
+
+/* Print Stylesheet: Isolamento total do Currículo na impressão (evita as 10 páginas do site) */
+@media print {
+  header,
+  footer,
+  main,
+  aside,
+  #cmd-k-trigger,
+  .custom-cursor-dot,
+  .custom-cursor-follower,
+  .no-print {
+    display: none !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 10mm 14mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 10pt !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .resume-modal-backdrop {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    inset: auto !important;
+  }
+
+  .resume-modal-card {
+    position: static !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    overflow: visible !important;
+    display: block !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+  }
+
+  .resume-modal-scroll {
+    overflow: visible !important;
+    max-height: none !important;
+    padding: 0 !important;
+  }
+
+  .resume-print-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

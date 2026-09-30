@@ -109,8 +109,17 @@ export function CommandPalette() {
     getThemeServerSnapshot
   );
 
-  const { scrollTo } = useSmoothScroll();
+  const { scrollTo, getLenis } = useSmoothScroll();
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    const lenis = getLenis();
+    if (isOpen) {
+      lenis?.stop();
+    } else {
+      lenis?.start();
+    }
+  }, [isOpen, getLenis]);
 
   const openPalette = useCallback(() => {
     sound.playClick();
@@ -402,10 +411,12 @@ export function CommandPalette() {
         <div
           role="dialog"
           aria-modal="true"
+          data-lenis-prevent="true"
           className="fixed inset-0 z-[9000] flex items-start justify-center pt-20 sm:pt-28 px-4 bg-zinc-950/80 backdrop-blur-md animate-in fade-in duration-200"
           onClick={closePalette}
         >
           <div
+            data-lenis-prevent="true"
             onClick={(e) => e.stopPropagation()}
             onKeyDown={handleKeyDownList}
             className="relative w-full max-w-2xl rounded-2xl bg-zinc-900 border border-white/15 shadow-2xl shadow-black/90 overflow-hidden flex flex-col animate-in zoom-in-95 duration-200"
@@ -425,7 +436,7 @@ export function CommandPalette() {
               />
               <button
                 onClick={closePalette}
-                className="p-1 rounded-md text-zinc-400 hover:text-white transition-colors"
+                className="p-1 rounded-md text-zinc-400 hover:text-white transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -439,8 +450,12 @@ export function CommandPalette() {
               </div>
             )}
 
-            {/* Lista de Comandos */}
-            <div className="max-h-80 overflow-y-auto p-2 space-y-1">
+            {/* Lista de Comandos com scroll nativo liberado */}
+            <div
+              data-lenis-prevent="true"
+              onWheel={(e) => e.stopPropagation()}
+              className="max-h-80 overflow-y-auto p-2 space-y-1"
+            >
               {filtered.length === 0 ? (
                 <div className="py-12 text-center text-zinc-500 text-xs font-mono">
                   Nenhum comando encontrado para &quot;{search}&quot;.
