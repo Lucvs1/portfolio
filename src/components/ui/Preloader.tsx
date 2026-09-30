@@ -142,10 +142,10 @@ export function Preloader() {
 
       {/* Centro: Contador de Telemetria e Logs */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center my-auto">
-        <div className="overflow-hidden mb-2">
+        <div className="mb-2">
           <span
             ref={counterRef}
-            className="text-7xl sm:text-9xl md:text-[11rem] font-black font-mono tracking-tighter text-white tabular-nums leading-none select-none drop-shadow-[0_0_35px_rgba(255,255,255,0.15)]"
+            className="text-7xl sm:text-9xl md:text-[11rem] font-black font-mono tracking-tighter text-white tabular-nums leading-none select-none"
           >
             00%
           </span>
@@ -178,3 +178,4 @@ export function Preloader() {
     </div>
   );
 }
+
