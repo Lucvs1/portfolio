@@ -13,7 +13,6 @@ import {
   CornerDownLeft,
   Sparkles,
   ExternalLink,
-  ChevronRight,
   Code2,
 } from "lucide-react";
 
@@ -49,7 +48,25 @@ export function HeroTerminal({
   onClose: () => void;
 }) {
   const [inputVal, setInputVal] = useState("");
-  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [history, setHistory] = useState<HistoryItem[]>([
+    {
+      id: "initial",
+      output: (
+        <div className="space-y-2 text-xs font-mono text-zinc-300">
+          <div className="flex items-center gap-2 text-emerald-400">
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-bold">LUCAS CABRAL DEVSTATION OS [v2.4.0-release]</span>
+          </div>
+          <p className="text-zinc-400 leading-relaxed">
+            Ambiente de linha de comando interativo. Arquitetura full stack com raízes na automação industrial.
+          </p>
+          <p className="text-zinc-500">
+            Digite <span className="text-cyan-400 font-semibold">&apos;help&apos;</span> para listar os comandos ou clique nos atalhos rápidos abaixo.
+          </p>
+        </div>
+      ),
+    },
+  ]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIdx, setHistoryIdx] = useState<number>(-1);
   const [isMatrixActive, setIsMatrixActive] = useState(false);
@@ -67,29 +84,6 @@ export function HeroTerminal({
       setTimeout(() => inputRef.current?.focus(), 150);
     }
   }, [isOpen]);
-
-  // Mensagem inicial do sistema
-  useEffect(() => {
-    setHistory([
-      {
-        id: "initial",
-        output: (
-          <div className="space-y-2 text-xs font-mono text-zinc-300">
-            <div className="flex items-center gap-2 text-emerald-400">
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="font-bold">LUCAS CABRAL DEVSTATION OS [v2.4.0-release]</span>
-            </div>
-            <p className="text-zinc-400 leading-relaxed">
-              Ambiente de linha de comando interativo. Arquitetura full stack com raízes na automação industrial.
-            </p>
-            <p className="text-zinc-500">
-              Digite <span className="text-cyan-400 font-semibold">&apos;help&apos;</span> para listar os comandos ou clique nos atalhos rápidos abaixo.
-            </p>
-          </div>
-        ),
-      },
-    ]);
-  }, []);
 
   // Rolagem suave para o fim ao adicionar novo item
   const scrollToBottom = useCallback(() => {

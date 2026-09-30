@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Clock, MapPin } from "lucide-react";
 
 export function LiveStatusWidget() {
   const [timeString, setTimeString] = useState<string>("");

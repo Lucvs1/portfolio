@@ -32,7 +32,9 @@ export function Preloader() {
     // Verifica se já executou o boot nesta sessão
     const hasBooted = sessionStorage.getItem("portfolio_booted");
     if (!hasBooted) {
-      setShouldRender(true);
+      queueMicrotask(() => {
+        setShouldRender(true);
+      });
     }
 
     const handleReboot = () => {

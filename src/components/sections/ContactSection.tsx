@@ -5,7 +5,6 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 import {
   Copy,
   Check,
-  Mail,
   Send,
   MessageSquare,
   FileText,
