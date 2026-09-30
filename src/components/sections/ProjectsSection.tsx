@@ -101,6 +101,8 @@ export function ProjectsSection() {
         {PROJECTS.map((project, idx) => (
           <article
             key={project.title}
+            data-cursor="project"
+            data-cursor-text={project.liveUrl ? "Acessar" : "GitHub"}
             className="group relative rounded-3xl bg-zinc-900/30 border border-white/10 hover:border-white/20 transition-all duration-500 overflow-hidden backdrop-blur-md p-8 sm:p-12 hover:shadow-2xl hover:shadow-black/60"
           >
             <div
