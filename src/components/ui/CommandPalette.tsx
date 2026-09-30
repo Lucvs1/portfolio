@@ -16,9 +16,11 @@ import {
   X,
   FileCode2,
   FileText,
+  RotateCcw,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { openResumeModal } from "@/components/ui/ResumeModal";
+import { rebootPortfolio } from "@/components/ui/Preloader";
 
 export type ThemeGlow = "emerald" | "cyan" | "violet" | "mono";
 
@@ -289,6 +291,19 @@ export function CommandPalette() {
         icon: Terminal,
         badge: "CURL",
         action: simulateResumeCurl,
+      },
+      {
+        id: "cli-reboot",
+        category: "Comandos Dev",
+        label: "lucas --reboot",
+        detail: "Reiniciar o boot do sistema (Replay Preloader)",
+        icon: RotateCcw,
+        badge: "SYS",
+        action: () => {
+          sound.playSuccess();
+          closePalette();
+          rebootPortfolio();
+        },
       },
 
       // Seção Temas de Luz

@@ -9,6 +9,7 @@ import { SoundToggle } from "@/components/ui/SoundToggle";
 import { CircuitScrollLine } from "@/components/ui/CircuitScrollLine";
 import { CommandPalette } from "@/components/ui/CommandPalette";
 import { ResumeModal } from "@/components/ui/ResumeModal";
+import { Preloader } from "@/components/ui/Preloader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,6 +59,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100 selection:bg-emerald-500/30 selection:text-white">
         <SmoothScrollProvider>
+          <Preloader />
           <CircuitScrollLine />
           <Navbar />
           <main className="flex-1">{children}</main>
