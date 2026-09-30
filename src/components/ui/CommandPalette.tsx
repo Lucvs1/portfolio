@@ -77,7 +77,7 @@ function subscribeTheme(callback: () => void): () => void {
   return () => themeListeners.delete(callback);
 }
 
-function changeTheme(theme: ThemeGlow) {
+export function changeTheme(theme: ThemeGlow) {
   currentTheme = theme;
   if (typeof window !== "undefined") {
     const root = document.documentElement;
@@ -291,6 +291,22 @@ export function CommandPalette() {
         icon: Terminal,
         badge: "CURL",
         action: simulateResumeCurl,
+      },
+      {
+        id: "cli-open-terminal",
+        category: "Comandos Dev",
+        label: "lucas --terminal",
+        detail: "Abrir o Terminal Interativo (CLI) no Hero",
+        icon: Terminal,
+        badge: ">_ CLI",
+        action: () => {
+          sound.playSuccess();
+          closePalette();
+          if (typeof window !== "undefined") {
+            window.dispatchEvent(new CustomEvent("open-hero-terminal"));
+          }
+          scrollTo("#hero", { offset: -30, duration: 0.8 });
+        },
       },
       {
         id: "cli-reboot",

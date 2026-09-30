@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { useSmoothScroll } from "@/components/providers/SmoothScrollProvider";
 import { ArrowUpRight, Terminal } from "lucide-react";
+import { HeroTerminal } from "@/components/ui/HeroTerminal";
+import { sound } from "@/lib/sound";
 
 export function HeroSection() {
   const containerRef = useRef<HTMLElement | null>(null);
@@ -16,7 +18,15 @@ export function HeroSection() {
   const statsRef = useRef<HTMLDivElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
 
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+
   const { scrollTo } = useSmoothScroll();
+
+  useEffect(() => {
+    const handleOpen = () => setIsTerminalOpen(true);
+    window.addEventListener("open-hero-terminal", handleOpen);
+    return () => window.removeEventListener("open-hero-terminal", handleOpen);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -129,7 +139,9 @@ export function HeroSection() {
 
         <div
           ref={actionsRef}
-          className="flex flex-wrap items-center justify-center gap-4 mb-16"
+          className={`flex flex-wrap items-center justify-center gap-4 transition-all duration-300 ${
+            isTerminalOpen ? "mb-6" : "mb-16"
+          }`}
         >
           <MagneticButton
             strength={0.25}
@@ -147,11 +159,38 @@ export function HeroSection() {
           >
             <span>Entrar em Contato</span>
           </MagneticButton>
+
+          <MagneticButton
+            strength={0.25}
+            onClick={() => {
+              sound.playClick();
+              setIsTerminalOpen((prev) => !prev);
+            }}
+            className={`px-6 py-3.5 rounded-full border text-sm font-medium transition-all flex items-center gap-2.5 backdrop-blur-sm ${
+              isTerminalOpen
+                ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-300 shadow-lg shadow-emerald-500/10"
+                : "bg-zinc-900/80 hover:bg-zinc-800/80 border-white/10 hover:border-emerald-500/30 text-zinc-200"
+            }`}
+          >
+            <Terminal className="w-4 h-4 text-emerald-400" />
+            <span>Terminal CLI</span>
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              {isTerminalOpen ? "Ativo" : ">_"}
+            </span>
+          </MagneticButton>
         </div>
+
+        {/* Terminal Interativo CLI */}
+        <HeroTerminal
+          isOpen={isTerminalOpen}
+          onClose={() => setIsTerminalOpen(false)}
+        />
 
         <div
           ref={statsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 pt-8 border-t border-white/10 w-full max-w-4xl"
+          className={`grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 ${
+            isTerminalOpen ? "pt-10 mt-10" : "pt-8"
+          } border-t border-white/10 w-full max-w-4xl transition-all duration-300`}
         >
           <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
             <span className="text-2xl sm:text-3xl font-bold text-white tracking-tight font-mono">
