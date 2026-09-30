@@ -13,6 +13,13 @@ const LOGS = [
   "SISTEMA PRONTO // BEM-VINDO AO PORTFÓLIO",
 ];
 
+export function rebootPortfolio() {
+  if (typeof window !== "undefined") {
+    sessionStorage.removeItem("portfolio_booted");
+    window.dispatchEvent(new CustomEvent("portfolio-reboot"));
+  }
+}
+
 export function Preloader() {
   const [shouldRender, setShouldRender] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -46,7 +53,6 @@ export function Preloader() {
     const counterObj = { value: 0 };
     const tl = gsap.timeline({
       onComplete: () => {
-        // Cortina desliza para cima revelando o Hero
         sound.playSuccess();
         gsap.to(containerRef.current, {
           yPercent: -100,
@@ -171,11 +177,4 @@ export function Preloader() {
       </div>
     </div>
   );
-}
-
-export function rebootPortfolio() {
-  if (typeof window !== "undefined") {
-    sessionStorage.removeItem("portfolio_booted");
-    window.dispatchEvent(new CustomEvent("portfolio-reboot"));
-  }
 }
