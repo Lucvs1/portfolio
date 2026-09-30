@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
+  <defs>
+    <linearGradient id="apple-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#09090b" />
+    </linearGradient>
+    <linearGradient id="apple-border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+
+  <rect width="180" height="180" rx="42" fill="url(#apple-bg)" />
+  <rect x="4" y="4" width="172" height="172" rx="38" stroke="url(#apple-border)" stroke-width="4" opacity="0.8" />
+
+  <text
+    x="90"
+    y="112"
+    font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    font-size="68"
+    font-weight="900"
+    letter-spacing="-3"
+    fill="#ffffff"
+    text-anchor="middle"
+  >
+    LB
+  </text>
+
+  <circle cx="132" cy="126" r="10" fill="#22c55e" />
+  <circle cx="132" cy="126" r="16" stroke="#22c55e" stroke-width="2" opacity="0.5" />
+</svg>
