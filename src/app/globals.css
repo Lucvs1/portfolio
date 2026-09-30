@@ -93,7 +93,7 @@ html.lenis body {
   pointer-events: none !important;
 }
 
-/* Print Stylesheet: Isolamento total do Currículo na impressão (evita as 10 páginas do site) */
+/* Print Stylesheet: Isolamento total do Currículo na impressão (evita as 10 páginas, 'localhost:3000' e botões) */
 @media print {
   header,
   footer,
@@ -102,13 +102,20 @@ html.lenis body {
   #cmd-k-trigger,
   .custom-cursor-dot,
   .custom-cursor-follower,
+  button,
   .no-print {
     display: none !important;
   }
 
+  /* Oculta anexos de links */
+  a[href]::after {
+    content: none !important;
+  }
+
+  /* Margem 0 remove o cabeçalho e rodapé padrão do navegador (como 'localhost:3000' e data) */
   @page {
     size: A4 portrait;
-    margin: 10mm 14mm;
+    margin: 0 !important;
   }
 
   html,
@@ -118,6 +125,8 @@ html.lenis body {
     font-size: 10pt !important;
     height: auto !important;
     overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .resume-modal-backdrop {
@@ -131,6 +140,7 @@ html.lenis body {
 
   .resume-modal-card {
     position: static !important;
+    width: 100% !important;
     max-width: 100% !important;
     max-height: none !important;
     box-shadow: none !important;
@@ -140,7 +150,8 @@ html.lenis body {
     overflow: visible !important;
     display: block !important;
     border-radius: 0 !important;
-    padding: 0 !important;
+    padding: 12mm 16mm !important;
+    margin: 0 !important;
   }
 
   .resume-modal-scroll {

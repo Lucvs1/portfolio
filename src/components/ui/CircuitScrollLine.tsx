@@ -71,7 +71,7 @@ export function CircuitScrollLine() {
   return (
     <aside
       aria-label="Trilha de navegação de circuito"
-      className="fixed left-6 xl:left-10 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center select-none pointer-events-auto"
+      className="fixed left-6 xl:left-10 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center select-none pointer-events-auto no-print print:hidden"
     >
       {/* Trilho base de circuito integrado */}
       <div className="relative h-64 sm:h-80 w-[2px] bg-white/10 rounded-full flex flex-col justify-between items-center py-2">

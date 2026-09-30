@@ -52,7 +52,7 @@ export function Navbar() {
     <>
       <header
         ref={navRef}
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-3 sm:px-6 py-4 md:py-6 pointer-events-none"
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-3 sm:px-6 py-4 md:py-6 pointer-events-none no-print print:hidden"
       >
         <nav
           className={`pointer-events-auto flex items-center justify-between gap-3 sm:gap-4 lg:gap-6 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border transition-all duration-300 ${

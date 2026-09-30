@@ -29,7 +29,7 @@ export function SoundToggle() {
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-40">
+    <div className="fixed bottom-6 left-6 z-40 no-print print:hidden">
       <MagneticButton
         onClick={handleToggle}
         strength={0.3}
