@@ -15,8 +15,10 @@ import {
   CornerDownLeft,
   X,
   FileCode2,
+  FileText,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
+import { openResumeModal } from "@/components/ui/ResumeModal";
 
 export type ThemeGlow = "emerald" | "cyan" | "violet" | "mono";
 
@@ -157,9 +159,9 @@ export function CommandPalette() {
     setTimeout(() => {
       setCopiedNotification(null);
       closePalette();
-      scrollTo("#about", { offset: -40 });
-    }, 1500);
-  }, [closePalette, scrollTo]);
+      openResumeModal();
+    }, 700);
+  }, [closePalette]);
 
   const commands: CommandItem[] = useMemo(
     () => [
@@ -209,6 +211,17 @@ export function CommandPalette() {
         },
       },
       {
+        id: "nav-resume",
+        category: "Navegação",
+        label: "Visualizar Currículo (CV)",
+        detail: "Abrir resumo executivo de formação e competências",
+        icon: FileText,
+        action: () => {
+          closePalette();
+          openResumeModal();
+        },
+      },
+      {
         id: "nav-contact",
         category: "Navegação",
         label: "Ir para Contato",
@@ -244,6 +257,19 @@ export function CommandPalette() {
         action: () => {
           copyEmail();
           scrollTo("#contact", { offset: -30 });
+        },
+      },
+      {
+        id: "cli-resume",
+        category: "Comandos Dev",
+        label: "lucas --resume",
+        detail: "Abrir o modal de currículo executivo",
+        icon: FileText,
+        badge: "CLI",
+        action: () => {
+          sound.playSuccess();
+          closePalette();
+          openResumeModal();
         },
       },
       {

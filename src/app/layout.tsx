@@ -8,6 +8,7 @@ import { CustomCursor } from "@/components/ui/CustomCursor";
 import { SoundToggle } from "@/components/ui/SoundToggle";
 import { CircuitScrollLine } from "@/components/ui/CircuitScrollLine";
 import { CommandPalette } from "@/components/ui/CommandPalette";
+import { ResumeModal } from "@/components/ui/ResumeModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,6 +64,7 @@ export default function RootLayout({
           <Footer />
           <SoundToggle />
           <CommandPalette />
+          <ResumeModal />
           <CustomCursor />
         </SmoothScrollProvider>
       </body>
