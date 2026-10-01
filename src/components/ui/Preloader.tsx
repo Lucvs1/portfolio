@@ -9,7 +9,7 @@ const LOGS = [
   "INICIANDO KERNEL INDUSTRIAL [FIRJAN SENAI]...",
   "CALIBRANDO RUNTIME REACT 19 & NEXT.JS 16...",
   "SINCRONIZANDO PIPELINE GSAP & MOTOR LENIS...",
-  "ESTABELECENDO GATEWAYS ASSÍNCRONOS [60 FPS]...",
+  "ESTABELECENDO GATEWAYS ASSÍNCRONOS [ALTA PERFORMANCE]...",
   "SISTEMA PRONTO // BEM-VINDO AO PORTFÓLIO",
 ];
 
@@ -174,7 +174,7 @@ export function Preloader() {
       <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-zinc-500 gap-2 border-t border-white/5 pt-4">
         <span>ENGENHARIA DE SOFTWARE & AUTOMAÇÃO INDUSTRIAL</span>
         <span className="hidden sm:inline text-zinc-400">
-          ARQUITETURA REATIVA • 60 FPS ENGINE
+          ARQUITETURA REATIVA • ALTA PERFORMANCE
         </span>
       </div>
     </div>

@@ -204,7 +204,7 @@ export function HeroSection() {
 
           <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
             <span className="text-2xl sm:text-3xl font-bold text-emerald-400 tracking-tight font-mono">
-              60 FPS
+              {t.hero.statsFps}
             </span>
             <span className="text-xs text-zinc-400 uppercase tracking-wider mt-1">
               {t.hero.statsFpsSub}

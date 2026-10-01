@@ -48,75 +48,79 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     id: "rota-bgr",
     title: "ROTA BGR",
     subtitle: {
-      pt: "Plataforma de Logística, Rastreamento & Despacho Dinâmico",
-      en: "Logistics Platform, Real-Time Tracking & Dynamic Dispatch",
+      pt: "Corporação Tática RP (GTA SA / MTA) • Painel Admin & Automação de Recrutamento",
+      en: "Tactical Police RP Corporation (GTA SA / MTA) • Admin Panel & Recruitment Automation",
     },
     badge: {
-      pt: "Aplicação Web em Produção",
-      en: "Live Web Application",
+      pt: "Plataforma em Produção",
+      en: "Live Web Platform",
     },
     accentColor: "text-emerald-400",
     gradient: "from-emerald-500/20 via-teal-500/10 to-transparent",
     liveUrl: "https://rotabgr.vercel.app/",
-    tags: ["Next.js 16", "React 19", "Mapbox GL", "Tailwind CSS", "Node.js", "WebSockets"],
+    tags: ["React / Next.js", "Painel Admin", "MTA / GTA RP", "Discord Webhooks", "Geração de PDF", "Tailwind CSS"],
     challenge: {
-      pt: "Operações logísticas descentralizadas sofriam com atrasos na comunicação de despacho, perda de sincronia de posições em tempo real e lentidão de carregamento em ferramentas legadas.",
-      en: "Decentralized logistics operations suffered from dispatch communication delays, lost real-time coordinate synchronization, and slow interface rendering in legacy tools.",
+      pt: "A corporação tática do servidor de GTA San Andreas / MTA necessitava de uma plataforma institucional de elite para apresentar sua estrutura militar (viaturas personalizadas, fardas da unidade, quadro do Alto Comando e galeria de veteranos Legends). Além disso, a gestão de recrutamentos gerava sobrecarga extrema: os alistamentos precisavam ser avaliados, corrigidos e arquivados manualmente pela banca examinadora.",
+      en: "The tactical police corporation on the GTA San Andreas / MTA server needed an elite institutional platform showcasing its military structure (custom vehicle fleet, unit uniforms, High Command officers, and Legends veteran memorial). Additionally, manual recruitment reviews created massive operational bottlenecks for commanding officers.",
       points: {
         pt: [
-          "Necessidade de mapa interativo de alta densidade sem travar no navegador do operador.",
-          "Comunicação bidirecional com latência inferior a 30ms para atualizações de rota.",
-          "Interface responsiva intuitiva para operadores de tráfego e motoristas.",
+          "Apresentação visual imersiva com catálogo de viaturas táticas, fardamentos da corporação, quadro do Alto Comando e memorial de membros Legends.",
+          "Painel de Administração completo para gerenciar operações em tempo real, editar membros do Alto Comando e Legends.",
+          "Controle dinâmico de recrutamento: o administrador abre e fecha o formulário de alistamento com um clique no painel.",
+          "Automação no envio: ao submeter o formulário, a plataforma calcula a quantidade de acertos e erros do candidato e dispara um Webhook para o Discord da corporação.",
+          "Geração dinâmica de PDF completo contendo todas as perguntas e respostas do candidato para análise e arquivo da banca examinadora.",
         ],
         en: [
-          "Requirement for high-density interactive map rendering at 60fps on operator browsers.",
-          "Sub-30ms bidirectional updates between dispatch center and drivers.",
-          "Responsive, highly intuitive interface adapted for both dispatchers and field agents.",
+          "Immersive visual catalog showcasing tactical patrol vehicles, custom uniforms, High Command officers, and inactive Legends veterans.",
+          "Comprehensive Admin Dashboard to configure operations in real time, manage High Command members, and update Legends rosters.",
+          "Dynamic recruitment controller: administrators can open or close application form access with a single click.",
+          "Submission automation: evaluates exam results, calculating correct and incorrect answers, and fires instant Discord Webhook notifications.",
+          "Server-side dynamic PDF generation containing full candidate questions and answers for commanding officers to audit.",
         ],
       },
     },
     architecture: {
-      pt: "Construído sobre o Next.js 16 com Server Components para entregar o esqueleto da aplicação em menos de 200ms. O Mapbox GL foi integrado com otimização WebGL e virtualização de marcadores, garantindo 60 FPS estáveis mesmo com centenas de waypoints simultâneos.",
-      en: "Engineered on Next.js 16 with Server Components to serve the initial shell in under 200ms. Mapbox GL was integrated with WebGL acceleration and marker virtualization, sustaining a locked 60 FPS even with hundreds of concurrent waypoints.",
+      pt: "Desenvolvido com arquitetura moderna combinando Next.js, controle de acesso administrativo e pipeline automatizado de formulários. O fluxo de recrutamento valida os dados no servidor, computa o gabarito teórico, formata um embed enriquecido para o canal da corregedoria no Discord e gera um arquivo PDF completo para download e registro histórico.",
+      en: "Architected with Next.js, role-based administrative controls, and an automated form pipeline. The recruitment engine validates submissions server-side, scores candidate answers, formats rich embeds for the Discord command staff, and compiles a comprehensive PDF dossier for historical filing.",
       techDecisions: [
         {
-          title: { pt: "Next.js App Router & RSC", en: "Next.js App Router & RSC" },
+          title: { pt: "Painel Admin Centralizado", en: "Centralized Admin Dashboard" },
           desc: {
-            pt: "Separação cirúrgica entre dados no servidor e interatividade do mapa no cliente, minimizando o bundle inicial de JS.",
-            en: "Clean decoupling of server-side data fetching and client-side map canvas, minimizing initial JS payload.",
+            pt: "Gestão completa de operações, cadastro do Alto Comando, memorial dos Legends e controle instantâneo de abertura/fechamento do alistamento.",
+            en: "Comprehensive management of corporative operations, High Command members, Legends hall, and instant recruitment form toggling.",
           },
         },
         {
-          title: { pt: "Mapbox WebGL Rendering", en: "Mapbox WebGL Rendering" },
+          title: { pt: "Automação com Discord Webhooks", en: "Discord Webhook Automation" },
           desc: {
-            pt: "Aceleração por hardware direto na GPU para manipulação suave de rotas vetoriais sem gargalos de CPU.",
-            en: "Direct GPU hardware acceleration for smooth vector route manipulation with zero CPU bottlenecks.",
+            pt: "Notificação imediata no Discord da corporação com dados do candidato, nota de aprovação e contagem precisa de acertos e erros.",
+            en: "Instant Discord notifications detailing candidate info, score grading, and precise correct/incorrect answer tallies.",
           },
         },
         {
-          title: { pt: "Telemetria & Cache Otimizado", en: "Telemetry & Smart Caching" },
+          title: { pt: "Geração Dinâmica de Dossiê em PDF", en: "Dynamic PDF Dossier Generation" },
           desc: {
-            pt: "Estratégia de debounce inteligente e revalidação assíncrona reduzindo chamadas redundantes à API.",
-            en: "Smart debounce strategy and background revalidation eliminating redundant API calls.",
+            pt: "Compilação automatizada da prova do candidato em PDF para análise detalhada da banca examinadora e arquivamento oficial.",
+            en: "Automated exam transcription into standardized PDF documents for official grading and archival by staff officers.",
           },
         },
       ],
     },
     metrics: [
       {
-        value: "-42%",
-        label: { pt: "Tempo de Despacho", en: "Dispatch Time" },
-        sublabel: { pt: "Criação de rotas acelerada", en: "Faster route planning" },
+        value: "100%",
+        label: { pt: "Automação no Recrutamento", en: "Recruitment Automation" },
+        sublabel: { pt: "Envio de webhook e dossiê em PDF", en: "Instant webhook & dynamic PDF" },
       },
       {
-        value: "< 25ms",
-        label: { pt: "Latência de Resposta", en: "Response Latency" },
-        sublabel: { pt: "Atualização fluida em tempo real", en: "Real-time updates" },
+        value: "0 ms",
+        label: { pt: "Atraso no Alistamento", en: "Application Latency" },
+        sublabel: { pt: "Disponibilidade imediata no Discord", en: "Immediate Discord notification" },
       },
       {
-        value: "99.98%",
-        label: { pt: "Disponibilidade", en: "Uptime" },
-        sublabel: { pt: "Estabilidade operacional sustentada", en: "Sustained stability" },
+        value: "100%",
+        label: { pt: "Painel Responsivo", en: "Responsive Admin" },
+        sublabel: { pt: "Gestão completa de efetivo e operações", en: "Full operations and staff management" },
       },
     ],
   },
@@ -124,8 +128,8 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     id: "cantinho-da-cigana",
     title: "Cantinho da Cigana",
     subtitle: {
-      pt: "E-Commerce de Alta Fidelidade & Branding Místico",
-      en: "High-Fidelity E-Commerce & Mystical Digital Showcase",
+      pt: "E-Commerce Cultural & Plataforma com Foco em Leitura de Baralho Cigano",
+      en: "Cultural E-Commerce & Platform Centered on Gypsy Tarot Readings",
     },
     badge: {
       pt: "Plataforma Comercial Ativa",
@@ -134,55 +138,57 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     accentColor: "text-amber-400",
     gradient: "from-amber-500/20 via-orange-500/10 to-transparent",
     liveUrl: "https://cantinhodacigana.com/",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Design System", "Stripe & PIX", "UI/UX"],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Baralho Cigano", "Cultura Cigana", "E-commerce", "Agendamento", "UI/UX"],
     challenge: {
-      pt: "Transformar uma loja tradicional de artigos místicos com mais de 300 produtos em um e-commerce cinematográfico que transmitisse elegância e gerasse confiança imediata no checkout mobile.",
-      en: "Transform a traditional storefront with over 300 physical products into a cinematic e-commerce platform that instills trust and drives seamless mobile checkout conversions.",
+      pt: "Criar uma plataforma digital acolhedora e de alta fidelidade que apresentasse e honrasse a tradição e cultura cigana, enquanto estruturava uma experiência fluida de e-commerce e agendamento voltada ao principal carro-chefe da cliente: o atendimento e Leitura de Baralho Cigano.",
+      en: "Build a captivating, high-fidelity digital platform honoring Gypsy traditions and cultural heritage, while crafting an intuitive e-commerce and booking experience centered on the client's flagship service: personalized Gypsy Tarot (Baralho Cigano) readings.",
       points: {
         pt: [
-          "Superar a desconfiança comum em e-commerces novos através de identidade visual autoral e refinada.",
-          "Garantir carregamento ultrarrápido (< 800ms) de fotos de produtos em alta resolução.",
-          "Checkout de apenas 2 etapas com opções de pagamento instantâneo via PIX e Cartão.",
+          "Evidenciar a Leitura de Baralho Cigano como serviço central de autoridade e principal transformador para os consulentes.",
+          "Divulgar a cultura e essência cigana com linguagem visual mística, respeitosa e cinematográfica.",
+          "Disponibilizar conteúdos educativos, histórias e catálogo de artigos exclusivos da tradição cigana.",
+          "Processo de compra e agendamento claro, com alta conversão e excelente usabilidade mobile.",
         ],
         en: [
-          "Build instant brand trust through bespoke dark obsidian visual identity and gold accents.",
-          "Ensure sub-800ms page load speeds for high-resolution product photography on mobile networks.",
-          "Streamlined 2-step checkout flow supporting instant PIX and credit card processing.",
+          "Spotlight Gypsy Tarot Readings as the client's primary high-authority transformative service.",
+          "Showcase Gypsy heritage through a mystical, culturally authentic, and captivating visual identity.",
+          "Provide educational cultural content, narratives, and a curated catalog of authentic items.",
+          "Deliver an effortless purchasing and consultation booking flow optimized for mobile conversions.",
         ],
       },
     },
     architecture: {
-      pt: "Desenvolvimento com Next.js e Tailwind CSS estruturado em torno de um Design System proprietário. As imagens são pré-otimizadas nos formatos WebP/AVIF com lazy loading contextual e blur-up placeholder, garantindo pontuações máximas no Google Core Web Vitals.",
-      en: "Architected with Next.js and Tailwind CSS anchored on a bespoke Design System. Imagery is automatically converted and served in WebP/AVIF with blur-up placeholders, securing top-tier Google Core Web Vitals scores.",
+      pt: "Desenvolvido com Next.js e Tailwind CSS estruturado em uma identidade visual personalizada 'Dark Obsidian' com acentos âmbar e dourados. O design system prioriza a jornada de agendamento de consultas de baralho cigano e a imersão nos conteúdos culturais, alcançando carregamento instantâneo no Core Web Vitals.",
+      en: "Engineered with Next.js and Tailwind CSS built around a bespoke 'Dark Obsidian' design system accented with warm amber and gold tones. The architecture prioritizes the booking funnel for tarot consultations and cultural discovery, achieving sub-second load times.",
       techDecisions: [
         {
-          title: { pt: "Design System Dark Obsidian", en: "Dark Obsidian Design System" },
+          title: { pt: "Foco no Carro-Chefe (Baralho Cigano)", en: "Flagship Focus (Gypsy Tarot)" },
           desc: {
-            pt: "Paleta escura elegante com acentos âmbar que destacam a atmosfera mística sem comprometer o contraste.",
-            en: "Sophisticated dark palette with amber accents elevating mystical branding while preserving accessibility.",
+            pt: "Hierarquia visual e funil de conversão planejados para direcionar consulentes ao agendamento de leituras personalizadas de baralho.",
+            en: "Visual hierarchy and conversion funnels strategically arranged to guide clients to book personalized tarot sessions.",
           },
         },
         {
-          title: { pt: "Otimização de Imagens AVIF/WebP", en: "AVIF/WebP Media Engine" },
+          title: { pt: "Imersão Cultural & Branding Místico", en: "Cultural Immersion & Mystical Branding" },
           desc: {
-            pt: "Compressão visual sem perda aparente, reduzindo em até 70% o consumo de dados de quem acessa pelo 4G.",
-            en: "Lossless perceived compression shrinking image payloads by up to 70% for mobile 4G users.",
+            pt: "Design imersivo que desmistifica a tradição cigana com respeito, beleza estética e conexão humana profunda.",
+            en: "Atmospheric design demystifying Gypsy traditions with cultural authenticity, aesthetic elegance, and emotional warmth.",
           },
         },
         {
-          title: { pt: "Microinterações de Conversão", en: "Microinteractions & UX" },
+          title: { pt: "Performance Mobile Otimizada", en: "Mobile-First Performance" },
           desc: {
-            pt: "Feedback tátil e visual ao adicionar ao carrinho e validar formulários, elevando a conversão.",
-            en: "Haptic visual feedback when adding to cart and validating forms, driving checkout conversion.",
+            pt: "Otimização refinada de mídias e layout responsivo garantindo leitura fluida e carregamento rápido mesmo em conexões móveis 4G.",
+            en: "Optimized media delivery and responsive layout ensuring smooth navigation and fast load speeds on mobile networks.",
           },
         },
       ],
     },
     metrics: [
       {
-        value: "+160%",
-        label: { pt: "Tempo de Sessão", en: "Session Duration" },
-        sublabel: { pt: "Maior engajamento no catálogo", en: "Catalog engagement" },
+        value: "1º",
+        label: { pt: "Carro-Chefe da Plataforma", en: "Flagship Offering" },
+        sublabel: { pt: "Leitura de Baralho Cigano", en: "Gypsy Tarot Readings" },
       },
       {
         value: "98+",
@@ -190,9 +196,9 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
         sublabel: { pt: "Performance mobile de elite", en: "Elite mobile speed" },
       },
       {
-        value: "< 700ms",
+        value: "< 800ms",
         label: { pt: "Carregamento Inicial", en: "First Contentful Paint" },
-        sublabel: { pt: "Navegação instantânea", en: "Instant browsing" },
+        sublabel: { pt: "Navegação ágil e confiável", en: "Fast and reliable browsing" },
       },
     ],
   },
@@ -200,75 +206,79 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     id: "bot-gateway-pro",
     title: "Bot Gateway Pro",
     subtitle: {
-      pt: "Gateway de Integração Assíncrona & Orquestrador de Mensageria",
-      en: "Asynchronous Integration Gateway & Messaging Orchestrator",
+      pt: "Bot de Discord para Pagamentos Automatizados via PIX, Cartão e Cripto",
+      en: "Discord Automated Payment Bot via PIX (Mercado Pago), Credit/Debit & Crypto (Stripe)",
     },
     badge: {
-      pt: "Backend / Open Source",
-      en: "Backend / Open Source",
+      pt: "Bot em Produção (Dados Mockados)",
+      en: "Production Bot (Mocked Data)",
     },
     accentColor: "text-blue-400",
     gradient: "from-blue-500/20 via-indigo-500/10 to-transparent",
     githubUrl: "https://github.com/Lucvs1/bot-gateway-pro",
-    tags: ["Node.js", "Docker", "Redis", "Webhooks", "REST API", "Microservices", "Git"],
+    tags: ["Discord.js", "Node.js", "Mercado Pago SDK", "Stripe API", "Webhooks", "Automação", "PIX", "Cripto"],
     challenge: {
-      pt: "Orquestrar múltiplos fluxos simultâneos de webhooks e eventos assíncronos entre bots de atendimento e sistemas de CRM sem perdas de pacotes durante picos súbitos de tráfego.",
-      en: "Orchestrate high-concurrency webhook event streams between conversational bot systems and enterprise CRMs without message loss during sudden traffic surges.",
+      pt: "Servidores e comunidades no Discord necessitavam monetizar produtos e assinaturas com checkout 100% nativo dentro do próprio Discord: receber pagamentos instantâneos via PIX (Mercado Pago) e Cartão de Crédito/Débito e Criptomoedas (Stripe), entregando automaticamente o cargo de cliente no servidor e despachando os conteúdos adquiridos logo após a confirmação. O bot foi desenvolvido com arquitetura robusta de produção e opera com dados mockados para exibição pública e segura de portfólio.",
+      en: "Discord servers and communities needed a seamless in-app monetization engine: accept instant domestic PIX payments (Mercado Pago) alongside global Credit/Debit/Crypto payments (Stripe) inside Discord, with automated role granting and instant digital content delivery in DMs post-purchase. The bot is production-engineered and utilizes mocked datasets for safe portfolio showcase.",
       points: {
         pt: [
-          "Eliminar timeouts de APIs receptoras em horários de pico.",
-          "Garantir entrega com garantia de ordem e retentativas exponenciais automáticas.",
-          "Isolamento completo através de containers Docker e facilidade de deploy.",
+          "Checkout nativo e intuitivo dentro do Discord através de comandos e botões interativos.",
+          "Múltiplos gateways: PIX instantâneo com confirmação via Mercado Pago e Cartão/Cripto com Stripe.",
+          "Automação pós-venda: concessão imediata do cargo do comprador no servidor do Discord.",
+          "Despacho automatizado do conteúdo ou arquivos comprados diretamente no chat privado (DM) do usuário.",
+          "Arquitetura tolerante a falhas testada em produção, configurada com dados mockados para demonstração pública segura.",
         ],
         en: [
-          "Eliminate third-party downstream webhook timeouts during traffic spikes.",
-          "Guarantee at-least-once message delivery with exponential backoff retries.",
-          "Complete environment isolation via Docker containers with effortless CI/CD.",
+          "Native, intuitive Discord checkout experience utilizing slash commands and interactive buttons.",
+          "Multi-gateway processing: instant QR Code PIX with Mercado Pago plus Credit/Debit/Crypto via Stripe.",
+          "Post-sale automation: immediate buyer role assignment in the Discord server.",
+          "Automated digital product delivery dispatched directly into the customer's private DMs.",
+          "Fault-tolerant production architecture configured with sanitized mock data for safe public showcase.",
         ],
       },
     },
     architecture: {
-      pt: "Pipeline orientado a eventos com Node.js e Redis para gestão de filas prioritárias. Adota o padrão Circuit Breaker para evitar falhas em cascata quando serviços externos ficam indisponíveis, com Dead-Letter Queue (DLQ) para auditoria forense de falhas.",
-      en: "Event-driven architecture built with Node.js and Redis priority queues. Implements the Circuit Breaker pattern to protect against cascading downstream outages, coupled with a Dead-Letter Queue (DLQ) for forensic retry handling.",
+      pt: "Construído em Node.js com Discord.js conectado a Webhooks de pagamento do Mercado Pago e da Stripe. Ao receber o evento de pagamento aprovado, o bot dispara o pipeline de fulfillment: interage com a API do Discord para atribuir a role e realiza o despacho seguro dos conteúdos comprados no chat privado do comprador, com tratamento robusto de erros e rate-limits.",
+      en: "Engineered in Node.js using Discord.js connected to payment webhooks from Mercado Pago and Stripe. Upon receiving payment approval events, the bot initiates an automated fulfillment pipeline: communicating with the Discord API to grant roles and securely dispatching purchased assets via private DMs with robust rate-limit handling.",
       techDecisions: [
         {
-          title: { pt: "Arquitetura Orientada a Eventos", en: "Event-Driven Engine" },
+          title: { pt: "Integração Híbrida Mercado Pago + Stripe", en: "Mercado Pago + Stripe Hybrid" },
           desc: {
-            pt: "Desacoplamento total entre o recebimento do webhook (resposta ACK < 2ms) e o processamento em segundo plano.",
-            en: "Total decoupling of incoming webhook ingestion (ACK < 2ms) from asynchronous background workers.",
+            pt: "Combinação do ecossistema Mercado Pago para PIX nacional dinâmico com Stripe para pagamentos internacionais em cartão e cripto.",
+            en: "Unified integration combining Mercado Pago for domestic dynamic PIX and Stripe for global credit card and crypto processing.",
           },
         },
         {
-          title: { pt: "Circuit Breaker & DLQ", en: "Circuit Breaker & DLQ" },
+          title: { pt: "Entrega Automatizada de Cargos & Conteúdo", en: "Automated Role & Asset Delivery" },
           desc: {
-            pt: "Protege o gateway contra sobrecarga de endpoints lentos, reencaminhando mensagens após estabilização.",
-            en: "Shields the gateway from slow downstream APIs, safely staging messages until service recovers.",
+            pt: "Atribuição instantânea de cargos no Discord e envio automático dos arquivos/links no privado do comprador após a aprovação da transação.",
+            en: "Instant Discord role provisioning and automated asset dispatch to the buyer's DMs upon transaction approval.",
           },
         },
         {
-          title: { pt: "Docker Containerization", en: "Docker Containerization" },
+          title: { pt: "Arquitetura Pronta com Dados Mockados", en: "Production Engine with Mock Data" },
           desc: {
-            pt: "Ambientes reproduzíveis com Docker Compose, facilitando orquestração local e em clusters de produção.",
-            en: "Reproducible Docker Compose environments for seamless local development and cloud cluster scale.",
+            pt: "Código estruturado e testado em produção, configurado com catálogo e dados mockados para exibição pública e segura no portfólio.",
+            en: "Fully battle-tested production codebase configured with mock product catalogs and demo transactions for safe public display.",
           },
         },
       ],
     },
     metrics: [
       {
-        value: "10k+",
-        label: { pt: "Webhooks / minuto", en: "Webhooks / min" },
-        sublabel: { pt: "Throughput sustentado", en: "Sustained throughput" },
+        value: "< 1s",
+        label: { pt: "Entrega do Cargo", en: "Role Assignment" },
+        sublabel: { pt: "Atribuição imediata no Discord", en: "Immediate guild role update" },
       },
       {
-        value: "1.2ms",
-        label: { pt: "Latência ACK", en: "ACK Ingestion Latency" },
-        sublabel: { pt: "Resposta instantânea", en: "Instant acknowledgment" },
+        value: "2 em 1",
+        label: { pt: "Gateways Integrados", en: "Integrated Gateways" },
+        sublabel: { pt: "PIX, Cartão e Criptomoedas", en: "PIX, Card & Crypto" },
       },
       {
-        value: "0%",
-        label: { pt: "Perda de Mensagens", en: "Message Loss" },
-        sublabel: { pt: "Garantia de entrega via DLQ", en: "Guaranteed delivery via DLQ" },
+        value: "100%",
+        label: { pt: "Automação Pós-Venda", en: "Post-Sale Automation" },
+        sublabel: { pt: "Despacho de conteúdo sem ação manual", en: "Zero-touch content delivery" },
       },
     ],
   },
@@ -527,9 +537,9 @@ export function CaseStudyModal() {
                 {selectedProject.metrics.map((metric, idx) => (
                   <div
                     key={idx}
-                    className="p-6 rounded-2xl bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 border border-white/10 flex flex-col items-center text-center justify-center space-y-2"
+                    className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 border border-white/10 flex flex-col items-center text-center justify-center space-y-2 min-w-0 overflow-hidden"
                   >
-                    <span className="text-4xl sm:text-5xl font-black font-mono text-emerald-400 tracking-tight">
+                    <span className="text-3xl sm:text-4xl lg:text-5xl font-black font-mono text-emerald-400 tracking-tight break-words max-w-full text-center">
                       {metric.value}
                     </span>
                     <span className="text-sm font-semibold text-white">

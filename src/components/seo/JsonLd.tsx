@@ -63,7 +63,7 @@ export function JsonLd() {
         url: baseUrl,
         name: "Lucas Cabral | Portfólio de Engenharia de Software",
         description:
-          "Portfólio oficial de Lucas Cabral. Engenharia de precisão e design fluido em 60 FPS.",
+          "Portfólio oficial de Lucas Cabral. Engenharia de precisão, alta performance e design fluido.",
         inLanguage: "pt-BR",
         publisher: {
           "@id": `${baseUrl}/#person`,

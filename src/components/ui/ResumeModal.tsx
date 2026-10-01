@@ -17,6 +17,7 @@ import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { sound } from "@/lib/sound";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { useSmoothScroll } from "@/components/providers/SmoothScrollProvider";
+import { useI18n } from "@/lib/i18n";
 
 export function openResumeModal() {
   if (typeof window !== "undefined") {
@@ -25,6 +26,11 @@ export function openResumeModal() {
 }
 
 export function ResumeModal() {
+  const { language } = useI18n();
+  const isPt = language === "pt";
+  const pdfHref = isPt ? "/Lucas_Cabral_Curriculo.pdf" : "/Lucas_Cabral_Resume.pdf";
+  const pdfFileName = isPt ? "Lucas_Cabral_Curriculo.pdf" : "Lucas_Cabral_Resume.pdf";
+
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const { getLenis } = useSmoothScroll();
@@ -88,7 +94,7 @@ export function ResumeModal() {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Currículo de Lucas Cabral"
+      aria-label={isPt ? "Currículo de Lucas Cabral" : "Lucas Cabral's Resume"}
       data-lenis-prevent="true"
       className="resume-modal-backdrop fixed inset-0 z-[9500] flex items-center justify-center p-3 sm:p-6 bg-zinc-950/85 backdrop-blur-md animate-in fade-in duration-200"
       onClick={handleClose}
@@ -110,30 +116,30 @@ export function ResumeModal() {
           <div className="flex items-center gap-2">
             {/* Opção 1: Baixar PDF */}
             <a
-              href="/Lucas_Cabral_Curriculo.pdf"
-              download="Lucas_Cabral_Curriculo.pdf"
+              href={pdfHref}
+              download={pdfFileName}
               onClick={() => sound.playSuccess()}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-xs font-mono text-emerald-300 transition-colors cursor-pointer"
-              title="Baixar arquivo PDF de 1 página"
+              title={isPt ? "Baixar arquivo PDF de 1 página" : "Download 1-page PDF file"}
             >
               <Download className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Baixar PDF</span>
+              <span>{isPt ? "Baixar PDF" : "Download PDF"}</span>
             </a>
 
             {/* Opção 2: Imprimir */}
             <button
               onClick={handlePrint}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700/80 border border-white/10 text-xs font-mono text-zinc-200 transition-colors cursor-pointer"
-              title="Abrir tela de impressão"
+              title={isPt ? "Abrir tela de impressão" : "Open print dialog"}
             >
               <Printer className="w-3.5 h-3.5 text-zinc-400" />
-              <span className="hidden sm:inline">Imprimir</span>
+              <span className="hidden sm:inline">{isPt ? "Imprimir" : "Print"}</span>
             </button>
 
             <button
               onClick={handleClose}
               className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer ml-1"
-              aria-label="Fechar currículo"
+              aria-label={isPt ? "Fechar currículo" : "Close resume"}
             >
               <X className="w-5 h-5" />
             </button>
@@ -153,12 +159,14 @@ export function ResumeModal() {
                 Lucas Bezerra de Menezes Cabral
               </h1>
               <p className="text-sm sm:text-base font-medium text-emerald-400 mt-1">
-                Engenheiro de Software | Full Stack & UI/UX Developer
+                {isPt
+                  ? "Engenheiro de Software | Full Stack & UI/UX Developer"
+                  : "Software Engineer | Full Stack & UI/UX Developer"}
               </p>
               <div className="flex flex-wrap items-center gap-4 mt-3 text-xs text-zinc-400 print:text-zinc-600 font-mono">
                 <span className="flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5 text-zinc-500" />
-                  Rio de Janeiro, Brasil
+                  {isPt ? "Rio de Janeiro, Brasil" : "Rio de Janeiro, Brazil"}
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1">
@@ -166,7 +174,9 @@ export function ResumeModal() {
                   {email}
                 </span>
                 <span>•</span>
-                <span className="text-emerald-400 font-semibold">Disponível Imediatamente</span>
+                <span className="text-emerald-400 font-semibold">
+                  {isPt ? "Disponível Imediatamente" : "Immediately Available"}
+                </span>
               </div>
             </div>
 
@@ -197,7 +207,9 @@ export function ResumeModal() {
                 onClick={handleCopyEmail}
                 className="px-3 py-1.5 rounded-full bg-white text-zinc-950 font-semibold text-xs hover:bg-zinc-200 transition-colors shadow-sm cursor-pointer"
               >
-                {copied ? "Copiado!" : "Copiar E-mail"}
+                {copied
+                  ? (isPt ? "Copiado!" : "Copied!")
+                  : (isPt ? "Copiar E-mail" : "Copy Email")}
               </button>
             </div>
           </div>
@@ -206,10 +218,12 @@ export function ResumeModal() {
           <section className="resume-print-item">
             <h2 className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2 flex items-center gap-2">
               <Briefcase className="w-3.5 h-3.5" />
-              Resumo Profissional
+              {isPt ? "Resumo Profissional" : "Professional Summary"}
             </h2>
             <p className="text-sm leading-relaxed text-zinc-300 print:text-zinc-800">
-              Engenheiro de Software com sólida base analítica forjada no curso técnico de Automação Industrial (Firjan SENAI) e formação acadêmica em Engenharia de Software. Especializado no desenvolvimento de ecossistemas web de alta fidelidade visual, interfaces reativas em 60 FPS com GSAP e Next.js, arquitetura de APIs assíncronas escaláveis e pipelines tolerantes a falhas.
+              {isPt
+                ? "Engenheiro de Software com sólida base analítica forjada no curso técnico de Automação Industrial (Firjan SENAI) e formação acadêmica em Engenharia de Software. Especializado no desenvolvimento de ecossistemas web de alta fidelidade visual e interfaces fluidas com GSAP e Next.js, arquitetura de APIs assíncronas escaláveis e pipelines tolerantes a falhas."
+                : "Software Engineer with a solid analytical foundation built through Industrial Automation technical training (Firjan SENAI) and an ongoing degree in Software Engineering. Specialized in architecting high-fidelity web ecosystems and fluid interfaces with GSAP and Next.js, scalable asynchronous APIs, and fault-tolerant pipelines."}
             </p>
           </section>
 
@@ -217,34 +231,38 @@ export function ResumeModal() {
           <section className="resume-print-item">
             <h2 className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 flex items-center gap-2">
               <GraduationCap className="w-3.5 h-3.5" />
-              Formação Acadêmica & Técnica
+              {isPt ? "Formação Acadêmica & Técnica" : "Education & Technical Background"}
             </h2>
             <div className="space-y-4">
               <div className="p-4 rounded-xl bg-zinc-950/60 border border-white/10 print:bg-zinc-50 print:border-zinc-300">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                   <h3 className="text-sm font-bold text-white print:text-black">
-                    Graduação em Engenharia de Software
+                    {isPt ? "Graduação em Engenharia de Software" : "B.S. in Software Engineering"}
                   </h3>
                   <span className="text-xs font-mono text-zinc-400 print:text-zinc-600">
-                    Anhanguera • Previsão 2027
+                    {isPt ? "Anhanguera • Previsão 2027" : "Anhanguera • Est. 2027"}
                   </span>
                 </div>
                 <p className="text-xs text-zinc-400 print:text-zinc-700 mt-1 leading-relaxed">
-                  Foco em engenharia de requisitos, arquitetura orientada a serviços, microsserviços, modelagem de dados e engenharia de software ágil.
+                  {isPt
+                    ? "Foco em engenharia de requisitos, arquitetura orientada a serviços, microsserviços, modelagem de dados e engenharia de software ágil."
+                    : "Emphasis on requirements engineering, service-oriented architecture, microservices, data modeling, and agile software development."}
                 </p>
               </div>
 
               <div className="p-4 rounded-xl bg-zinc-950/60 border border-white/10 print:bg-zinc-50 print:border-zinc-300">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                   <h3 className="text-sm font-bold text-white print:text-black">
-                    Técnico em Automação Industrial
+                    {isPt ? "Técnico em Automação Industrial" : "Industrial Automation Technician"}
                   </h3>
                   <span className="text-xs font-mono text-zinc-400 print:text-zinc-600">
-                    Firjan SENAI • Concluído 2022
+                    {isPt ? "Firjan SENAI • Concluído 2022" : "Firjan SENAI • Completed 2022"}
                   </span>
                 </div>
                 <p className="text-xs text-zinc-400 print:text-zinc-700 mt-1 leading-relaxed">
-                  Programação de Controladores Lógicos Programáveis (CLP), instrumentação industrial de campo, redes de automação (Modbus/Ethernet) e sistemas críticos tolerantes a falhas.
+                  {isPt
+                    ? "Programação de Controladores Lógicos Programáveis (CLP), instrumentação industrial de campo, redes de automação (Modbus/Ethernet) e sistemas críticos tolerantes a falhas."
+                    : "Programming of Programmable Logic Controllers (PLC), industrial field instrumentation, automation networks (Modbus/Ethernet), and mission-critical fault-tolerant systems."}
                 </p>
               </div>
             </div>
@@ -254,7 +272,7 @@ export function ResumeModal() {
           <section className="resume-print-item">
             <h2 className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 flex items-center gap-2">
               <Award className="w-3.5 h-3.5" />
-              Projetos Selecionados em Produção
+              {isPt ? "Projetos Selecionados em Produção" : "Selected Production Projects"}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="p-4 rounded-xl bg-zinc-950/60 border border-white/10 print:bg-zinc-50 print:border-zinc-300">
@@ -273,7 +291,9 @@ export function ResumeModal() {
                   Next.js • Tailwind • GSAP
                 </span>
                 <p className="text-xs text-zinc-400 print:text-zinc-700 leading-relaxed">
-                  Aplicação web interativa de alto desempenho para operações e comunidade, mantendo 99.98% de uptime e renderização a 60 FPS.
+                  {isPt
+                    ? "Aplicação web interativa para corporação policial em GTA RP/MTA: painel administrativo completo, catálogo de viaturas e fardas, memorial de Legends e recrutamento automatizado via Discord Webhooks e PDF."
+                    : "Interactive web application for a GTA RP/MTA police department: complete admin dashboard, patrol fleet & uniforms catalog, Legends memorial, and recruitment automated via Discord Webhooks and dynamic PDF."}
                 </p>
               </div>
 
@@ -290,10 +310,12 @@ export function ResumeModal() {
                   </a>
                 </div>
                 <span className="text-[10px] font-mono text-zinc-400 print:text-zinc-600 block mb-2">
-                  React • UI/UX • E-commerce
+                  {isPt ? "Next.js • Tailwind CSS • UX Místico" : "Next.js • Tailwind CSS • Mystical UX"}
                 </span>
                 <p className="text-xs text-zinc-400 print:text-zinc-700 leading-relaxed">
-                  Plataforma de comércio eletrônico com catálogo dinâmico de produtos, UX voltada para conversão e alta performance no carregamento.
+                  {isPt
+                    ? "Plataforma cultural e e-commerce voltada ao universo cigano, com foco central no agendamento de leitura de baralho cigano, catálogo de produtos artesanais e estética Dark Obsidian."
+                    : "Cultural platform and e-commerce centered around Gypsy culture, with its flagship focus on Gypsy Tarot readings booking, handcrafted item catalog, and immersive Dark Obsidian aesthetics."}
                 </p>
               </div>
 
@@ -310,10 +332,12 @@ export function ResumeModal() {
                   </a>
                 </div>
                 <span className="text-[10px] font-mono text-zinc-400 print:text-zinc-600 block mb-2">
-                  Node.js • Express • Docker
+                  Discord.js • Mercado Pago • Stripe • Node.js
                 </span>
                 <p className="text-xs text-zinc-400 print:text-zinc-700 leading-relaxed">
-                  Microsserviço de backend assíncrono para ingestão, fila e despacho de webhooks com latência inferior a 1.5ms.
+                  {isPt
+                    ? "Bot de Discord para monetização nativa com checkout via PIX (Mercado Pago) e Cartão/Cripto (Stripe), atribuição automatizada de cargos e entrega imediata de conteúdos adquiridos."
+                    : "Discord bot for in-app monetization and native checkout via PIX (Mercado Pago) and Credit/Crypto (Stripe), featuring automated role assignment and immediate digital content dispatch."}
                 </p>
               </div>
             </div>
@@ -323,7 +347,7 @@ export function ResumeModal() {
           <section className="resume-print-item">
             <h2 className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5" />
-              Competências Técnicas
+              {isPt ? "Competências Técnicas" : "Technical Competencies"}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
               <div className="p-3 rounded-lg bg-zinc-950/40 border border-white/5 print:bg-zinc-50 print:border-zinc-200">
@@ -333,7 +357,9 @@ export function ResumeModal() {
                 </p>
               </div>
               <div className="p-3 rounded-lg bg-zinc-950/40 border border-white/5 print:bg-zinc-50 print:border-zinc-200">
-                <span className="text-cyan-400 print:text-cyan-700 font-bold block mb-1.5">Back-end & Infra</span>
+                <span className="text-cyan-400 print:text-cyan-700 font-bold block mb-1.5">
+                  {isPt ? "Back-end & Infra" : "Back-end & Infrastructure"}
+                </span>
                 <p className="text-zinc-400 print:text-zinc-700 leading-relaxed">
                   Node.js, Express, REST APIs, MySQL, Docker, Bash/Shell, Git/GitHub, Vercel.
                 </p>
@@ -341,7 +367,9 @@ export function ResumeModal() {
               <div className="p-3 rounded-lg bg-zinc-950/40 border border-white/5 print:bg-zinc-50 print:border-zinc-200">
                 <span className="text-indigo-400 print:text-indigo-700 font-bold block mb-1.5">UI/UX & Design</span>
                 <p className="text-zinc-400 print:text-zinc-700 leading-relaxed">
-                  Figma, Design Systems, Adobe Photoshop, Illustrator, Prototipação, Acessibilidade.
+                  {isPt
+                    ? "Figma, Design Systems, Adobe Photoshop, Illustrator, Prototipação, Acessibilidade."
+                    : "Figma, Design Systems, Adobe Photoshop, Illustrator, Prototyping, Accessibility."}
                 </p>
               </div>
             </div>
@@ -351,19 +379,27 @@ export function ResumeModal() {
         {/* Rodapé com botões de Baixar PDF, Imprimir e Fechar */}
         <div className="no-print p-4 sm:p-6 border-t border-white/10 bg-zinc-950/70 flex flex-col sm:flex-row items-center justify-between gap-3 print:hidden shrink-0">
           <p className="text-xs text-zinc-400 font-mono">
-            Pressione <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-white/10 text-zinc-300">ESC</kbd> para fechar
+            {isPt ? (
+              <>
+                Pressione <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-white/10 text-zinc-300">ESC</kbd> para fechar
+              </>
+            ) : (
+              <>
+                Press <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 border border-white/10 text-zinc-300">ESC</kbd> to close
+              </>
+            )}
           </p>
 
           <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
             {/* Opção Baixar PDF */}
             <a
-              href="/Lucas_Cabral_Curriculo.pdf"
-              download="Lucas_Cabral_Curriculo.pdf"
+              href={pdfHref}
+              download={pdfFileName}
               onClick={() => sound.playSuccess()}
               className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/20 cursor-pointer"
             >
               <Download className="w-4 h-4 text-zinc-950" />
-              <span>Baixar PDF (1 Página)</span>
+              <span>{isPt ? "Baixar PDF (1 Página)" : "Download PDF (1 Page)"}</span>
             </a>
 
             {/* Opção Imprimir */}
@@ -372,14 +408,14 @@ export function ResumeModal() {
               className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-white/10 text-xs font-semibold text-white transition-colors cursor-pointer"
             >
               <Printer className="w-3.5 h-3.5 text-zinc-400" />
-              <span>Imprimir</span>
+              <span>{isPt ? "Imprimir" : "Print"}</span>
             </button>
 
             <button
               onClick={handleClose}
               className="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 text-xs font-semibold transition-colors cursor-pointer"
             >
-              Fechar
+              {isPt ? "Fechar" : "Close"}
             </button>
           </div>
         </div>

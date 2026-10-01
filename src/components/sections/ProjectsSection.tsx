@@ -10,43 +10,67 @@ const PROJECTS: ProjectData[] = [
   {
     id: "rota-bgr",
     title: "ROTA BGR",
-    category: "Web Application & Interactive Platform",
-    description:
-      "Interface web imersiva de alta performance voltada para comunidade e operações, com design responsivo, gerenciamento de dados e experiência fluida.",
-    tags: ["React", "Tailwind CSS", "Vercel", "UI/UX", "Interactive UI"],
+    category: {
+      pt: "Corporação Policial RP • GTA SA / MTA",
+      en: "Tactical Police RP Unit • GTA SA / MTA",
+    },
+    description: {
+      pt: "Portal da corporação tática para cidade de RP no GTA San Andreas / MTA. Apresenta o catálogo de viaturas, fardamentos oficiais, quadro do Alto Comando e galeria de veteranos Legends. Inclui Painel de Administração para controle de operações, gestão de alistamento com abertura/fechamento em tempo real, despacho automático via Discord Webhook com métricas de acertos/erros e geração de dossiê da prova em PDF.",
+      en: "Official tactical police corporation portal for GTA San Andreas / MTA Roleplay. Showcases custom vehicle fleets, uniforms, High Command officers, and Legends hall. Features a secure Admin Dashboard to manage operations, toggle recruitment, and automate candidate exams via Discord Webhooks with score grading and dynamic PDF dossier generation.",
+    },
+    tags: ["React", "Next.js", "Painel Admin", "MTA / GTA RP", "Discord Webhooks", "PDF Generation", "Tailwind CSS"],
     liveUrl: "https://rotabgr.vercel.app/",
     githubUrl: null,
     gradient: "from-emerald-500/20 via-teal-500/10 to-transparent",
     accent: "text-emerald-400",
-    badge: "Plataforma Ativa",
+    badge: {
+      pt: "Plataforma Ativa",
+      en: "Live Platform",
+    },
     previewType: "platform",
   },
   {
     id: "cantinho-da-cigana",
     title: "Cantinho da Cigana",
-    category: "E-Commerce & Digital Showcase",
-    description:
-      "Plataforma comercial completa para exibição e conversão de produtos, integrando identidade visual proprietária e foco em conversão e usabilidade.",
-    tags: ["Web Platform", "E-commerce", "Design System", "Responsividade"],
+    category: {
+      pt: "E-Commerce Cultural & Leitura de Baralho Cigano",
+      en: "Cultural E-Commerce & Gypsy Tarot Readings",
+    },
+    description: {
+      pt: "E-commerce e plataforma cultural dedicada à valorização e difusão das tradições ciganas, com venda de artigos temáticos e foco primordial no atendimento e agendamento de Leitura de Baralho Cigano — o serviço de maior autoridade e carro-chefe da cliente.",
+      en: "Cultural e-commerce platform dedicated to honoring Gypsy heritage and traditions. Offers curated content and authentic items, anchored on its flagship high-authority offering: personalized Gypsy Tarot (Baralho Cigano) consultation bookings.",
+    },
+    tags: ["Next.js", "E-commerce", "Baralho Cigano", "Cultura Cigana", "Agendamento", "Tailwind CSS", "UI/UX"],
     liveUrl: "https://cantinhodacigana.com/",
     githubUrl: null,
     gradient: "from-amber-500/20 via-orange-500/10 to-transparent",
     accent: "text-amber-400",
-    badge: "E-commerce no Ar",
+    badge: {
+      pt: "E-commerce no Ar",
+      en: "Live E-Commerce",
+    },
     previewType: "ecommerce",
   },
   {
     id: "bot-gateway-pro",
     title: "Bot Gateway Pro",
-    category: "Backend & Automation Integration",
-    description:
-      "Gateway de integração e processamento assíncrono de dados para fluxos automatizados, orquestração de APIs e regras de negócio escaláveis.",
-    tags: ["Node.js", "API Gateway", "Automação", "Assíncrono", "Git"],
+    category: {
+      pt: "Bot de Discord & Gateway de Pagamentos",
+      en: "Discord Bot & Automated Payment Gateway",
+    },
+    description: {
+      pt: "Bot de Discord de alta performance para monetização e checkout nativo. Processa pagamentos via PIX instantâneo (Mercado Pago) e Cartão de Crédito/Débito e Criptomoedas (Stripe). Atribui automaticamente os cargos aos compradores e despacha os conteúdos digitais adquiridos logo após a confirmação. Arquitetura completa de produção com dados mockados para exibição pública segura.",
+      en: "High-performance automated Discord bot for in-app monetization and checkout. Processes instant PIX payments (Mercado Pago) and Credit/Debit/Crypto (Stripe). Automatically grants member roles in the server and delivers purchased digital content immediately post-sale. Fully engineered for production with sanitized mock data for safe public showcase.",
+    },
+    tags: ["Discord.js", "Node.js", "Mercado Pago (PIX)", "Stripe (Card & Crypto)", "Webhooks", "Automação", "Roles"],
     liveUrl: null,
     githubUrl: "https://github.com/Lucvs1/bot-gateway-pro",
     gradient: "from-blue-500/20 via-indigo-500/10 to-transparent",
     accent: "text-blue-400",
-    badge: "Open Source / Backend",
+    badge: {
+      pt: "Bot em Produção (Dados Mockados)",
+      en: "Production Bot (Mocked Data)",
+    },
     previewType: "gateway",
   },
 ];

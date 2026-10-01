@@ -134,7 +134,7 @@ export default function Image() {
               lineHeight: 1.1,
             }}
           >
-            Design Fluido em 60 FPS
+            Design Fluido & Alta Performance
           </div>
           <p
             style={{

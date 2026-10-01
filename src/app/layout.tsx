@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     template: "%s | Lucas Cabral",
   },
   description:
-    "Portfólio de Lucas Bezerra de Menezes Cabral. Engenheiro de Software Full Stack e UI/UX Developer no Rio de Janeiro. Arquitetura reativa a 60 FPS, Next.js 16, TypeScript, GSAP e Automação Industrial.",
+    "Portfólio de Lucas Bezerra de Menezes Cabral. Engenheiro de Software Full Stack e UI/UX Developer no Rio de Janeiro. Interfaces fluidas de alta performance, Next.js 16, TypeScript, GSAP e Automação Industrial.",
   keywords: [
     "Lucas Bezerra",
     "Lucas Cabral",

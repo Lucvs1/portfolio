@@ -291,7 +291,7 @@ export function HeroTerminal({
                 <span className="text-amber-400 font-semibold">🏭 Automação Industrial:</span> CLPs (Siemens/Rockwell), Ladder/SFC, Modbus TCP/IP, Profinet, IHM/SCADA.
               </div>
               <div>
-                <span className="text-purple-400 font-semibold">🎨 Design & Performance:</span> Figma, Design Systems, Glassmorphism, 60/120 FPS optimization.
+                <span className="text-purple-400 font-semibold">🎨 Design & Performance:</span> Figma, Design Systems, Glassmorphism, Core Web Vitals & Fluid UX.
               </div>
             </div>
           </div>
@@ -309,15 +309,15 @@ export function HeroTerminal({
                 <div>
                   <div className="text-white font-semibold flex items-center gap-2">
                     <span className="text-cyan-400">[1]</span> ROTA BGR
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Produção</span>
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">MTA RP</span>
                   </div>
                   <p className="text-zinc-400 text-[11px] mt-0.5">
-                    Sistema logístico com rastreamento de rotas em tempo real, telemetria e despacho inteligente.
+                    Portal da corporação tática RP (GTA SA / MTA) com viaturas, Alto Comando, Legends e recrutamento automático via Discord Webhook com geração de PDF.
                   </p>
-                  <p className="text-zinc-500 text-[10px] mt-1 font-sans">Next.js • Node.js • Mapbox • Tailwind</p>
+                  <p className="text-zinc-500 text-[10px] mt-1 font-sans">React • Next.js • Discord Webhooks • PDF • Admin</p>
                 </div>
                 <a
-                  href="https://rotabgr.com.br"
+                  href="https://rotabgr.vercel.app/"
                   target="_blank"
                   rel="noreferrer"
                   className="shrink-0 p-1.5 rounded hover:bg-white/10 text-cyan-400 transition-colors"
@@ -330,15 +330,15 @@ export function HeroTerminal({
                 <div>
                   <div className="text-white font-semibold flex items-center gap-2">
                     <span className="text-cyan-400">[2]</span> Cantinho da Cigana
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Produção</span>
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">E-Commerce</span>
                   </div>
                   <p className="text-zinc-400 text-[11px] mt-0.5">
-                    Plataforma e-commerce & branding místico com checkout fluido e catálogo de alta conversão.
+                    E-commerce cultural voltado à tradição cigana com foco central no atendimento e agendamento de Leitura de Baralho Cigano (carro-chefe).
                   </p>
-                  <p className="text-zinc-500 text-[10px] mt-1 font-sans">Next.js • TypeScript • Tailwind • UI/UX</p>
+                  <p className="text-zinc-500 text-[10px] mt-1 font-sans">Next.js • TypeScript • Baralho Cigano • UI/UX Místico</p>
                 </div>
                 <a
-                  href="https://cantinhodacigana.com.br"
+                  href="https://cantinhodacigana.com/"
                   target="_blank"
                   rel="noreferrer"
                   className="shrink-0 p-1.5 rounded hover:bg-white/10 text-cyan-400 transition-colors"
@@ -351,15 +351,15 @@ export function HeroTerminal({
                 <div>
                   <div className="text-white font-semibold flex items-center gap-2">
                     <span className="text-cyan-400">[3]</span> Bot Gateway Pro
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">Orquestrador</span>
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">Discord Bot</span>
                   </div>
                   <p className="text-zinc-400 text-[11px] mt-0.5">
-                    Orquestrador de mensageria com roteamento de webhooks e integração WhatsApp/CRM.
+                    Bot de Discord para pagamentos via PIX (Mercado Pago) e Cartão/Cripto (Stripe) com entrega imediata de cargo no servidor e conteúdos por DM.
                   </p>
-                  <p className="text-zinc-500 text-[10px] mt-1 font-sans">Node.js • Docker • Redis • Webhooks</p>
+                  <p className="text-zinc-500 text-[10px] mt-1 font-sans">Discord.js • Node.js • Mercado Pago • Stripe • Webhooks</p>
                 </div>
                 <a
-                  href="https://github.com/Lucas-cabral1"
+                  href="https://github.com/Lucvs1/bot-gateway-pro"
                   target="_blank"
                   rel="noreferrer"
                   className="shrink-0 p-1.5 rounded hover:bg-white/10 text-cyan-400 transition-colors"
@@ -379,19 +379,19 @@ export function HeroTerminal({
       case "open": {
         const target = args[0]?.toLowerCase();
         if (target === "1" || target === "rotabgr") {
-          window.open("https://rotabgr.com.br", "_blank");
-          output = <span className="text-emerald-400">✓ Abrindo ROTA BGR em nova aba (https://rotabgr.com.br)...</span>;
+          window.open("https://rotabgr.vercel.app/", "_blank");
+          output = <span className="text-emerald-400">✓ Abrindo ROTA BGR em nova aba (https://rotabgr.vercel.app/)...</span>;
         } else if (target === "2" || target === "cantinho" || target === "cigana") {
-          window.open("https://cantinhodacigana.com.br", "_blank");
-          output = <span className="text-emerald-400">✓ Abrindo Cantinho da Cigana em nova aba (https://cantinhodacigana.com.br)...</span>;
+          window.open("https://cantinhodacigana.com/", "_blank");
+          output = <span className="text-emerald-400">✓ Abrindo Cantinho da Cigana em nova aba (https://cantinhodacigana.com/)...</span>;
         } else if (target === "3" || target === "bot" || target === "gateway") {
-          window.open("https://github.com/Lucas-cabral1", "_blank");
-          output = <span className="text-emerald-400">✓ Abrindo repositório no GitHub...</span>;
+          window.open("https://github.com/Lucvs1/bot-gateway-pro", "_blank");
+          output = <span className="text-emerald-400">✓ Abrindo repositório do Bot Gateway Pro no GitHub...</span>;
         } else if (target === "github") {
-          window.open("https://github.com/Lucas-cabral1", "_blank");
+          window.open("https://github.com/Lucvs1", "_blank");
           output = <span className="text-emerald-400">✓ Abrindo GitHub...</span>;
         } else if (target === "linkedin") {
-          window.open("https://linkedin.com/in/lucas-cabral-ti", "_blank");
+          window.open("https://www.linkedin.com/in/lucas-bezerra-51030b303", "_blank");
           output = <span className="text-emerald-400">✓ Abrindo LinkedIn...</span>;
         } else {
           output = <span className="text-amber-400">Uso: open &lt;1 | 2 | 3 | github | linkedin&gt;</span>;
@@ -455,7 +455,9 @@ export function HeroTerminal({
         openResumeModal();
         output = (
           <div className="text-emerald-400 font-mono text-xs">
-            ✓ Modal do Currículo Executivo acionado com sucesso. (Opções de Impressão A4 e Download em PDF direto).
+            {language === "pt"
+              ? "✓ Modal do Currículo Executivo acionado com sucesso. (Opções de Impressão A4 e Download em PDF direto)."
+              : "✓ Executive Resume modal successfully opened. (A4 print and direct PDF download options)."}
           </div>
         );
         sound.playSuccess();
@@ -579,7 +581,7 @@ export function HeroTerminal({
             <p className="text-cyan-400 font-bold">TELEMETRIA DO SISTEMA:</p>
             <p>• Uptime da sessão: <span className="text-emerald-400 font-semibold">{mins}m {secs}s</span></p>
             <p>• Engine: <span className="text-white">Next.js 16.3.7 (Turbopack) & React 19</span></p>
-            <p>• Motion: <span className="text-white">GSAP 3.12 + Lenis Virtual Scroll (60 FPS)</span></p>
+            <p>• Motion: <span className="text-white">GSAP 3.12 + Lenis Smooth Scroll</span></p>
             <p>• Áudio: <span className="text-white">Web Audio API Synth Core (48 kHz)</span></p>
             <p>• Status: <span className="text-emerald-400 font-semibold">Ready / 0 memory leaks</span></p>
           </div>

@@ -163,22 +163,30 @@ export function CommandPalette() {
   const copyEmail = useCallback(() => {
     navigator.clipboard.writeText("lucasbezerracontact0@gmail.com");
     sound.playSuccess();
-    setCopiedNotification("E-mail copiado para o clipboard!");
+    setCopiedNotification(
+      language === "pt"
+        ? "E-mail copiado para a área de transferência!"
+        : "Email copied to clipboard!"
+    );
     setTimeout(() => {
       setCopiedNotification(null);
       closePalette();
     }, 1200);
-  }, [closePalette]);
+  }, [closePalette, language]);
 
   const simulateResumeCurl = useCallback(() => {
     sound.playSuccess();
-    setCopiedNotification("curl /api/resume: Status 200 OK (Abrindo CV...)");
+    setCopiedNotification(
+      language === "pt"
+        ? "curl /api/resume: Status 200 OK (Abrindo CV...)"
+        : "curl /api/resume: Status 200 OK (Opening Resume...)"
+    );
     setTimeout(() => {
       setCopiedNotification(null);
       closePalette();
       openResumeModal();
     }, 700);
-  }, [closePalette]);
+  }, [closePalette, language]);
 
   const commands: CommandItem[] = useMemo(
     () => [
@@ -230,8 +238,11 @@ export function CommandPalette() {
       {
         id: "nav-resume",
         category: "Navegação",
-        label: "Visualizar Currículo (CV)",
-        detail: "Abrir resumo executivo de formação e competências",
+        label: language === "pt" ? "Visualizar Currículo (CV)" : "View Resume (CV)",
+        detail:
+          language === "pt"
+            ? "Abrir resumo executivo de formação e competências"
+            : "Open executive summary of background and skills",
         icon: FileText,
         action: () => {
           closePalette();
@@ -280,7 +291,10 @@ export function CommandPalette() {
         id: "cli-resume",
         category: "Comandos Dev",
         label: "lucas --resume",
-        detail: "Abrir o modal de currículo executivo",
+        detail:
+          language === "pt"
+            ? "Abrir o modal de currículo executivo"
+            : "Open executive resume modal",
         icon: FileText,
         badge: "CLI",
         action: () => {
@@ -293,7 +307,10 @@ export function CommandPalette() {
         id: "cli-curl-resume",
         category: "Comandos Dev",
         label: "curl /api/resume",
-        detail: "Simular requisição de currículo da API",
+        detail:
+          language === "pt"
+            ? "Simular requisição de currículo da API"
+            : "Simulate API resume fetch request",
         icon: Terminal,
         badge: "CURL",
         action: simulateResumeCurl,
@@ -344,7 +361,7 @@ export function CommandPalette() {
         id: "cli-cs-rota-bgr",
         category: "Comandos Dev",
         label: "Case Study: ROTA BGR",
-        detail: "Arquitetura Mapbox WebGL, Server Components e telemetria",
+        detail: "Portal da Corporação GTA RP / MTA, Painel Admin, Webhooks e PDF",
         icon: BookOpen,
         badge: "CASE",
         action: () => {
@@ -356,7 +373,7 @@ export function CommandPalette() {
         id: "cli-cs-cigana",
         category: "Comandos Dev",
         label: "Case Study: Cantinho da Cigana",
-        detail: "E-Commerce de alta fidelidade, PageSpeed 98+ e branding",
+        detail: "E-Commerce cultural & Leitura de Baralho Cigano (carro-chefe)",
         icon: BookOpen,
         badge: "CASE",
         action: () => {
@@ -368,7 +385,7 @@ export function CommandPalette() {
         id: "cli-cs-bot",
         category: "Comandos Dev",
         label: "Case Study: Bot Gateway Pro",
-        detail: "Throughput de 10k webhooks/min, Docker e Circuit Breaker",
+        detail: "Bot de Discord para pagamentos (PIX / Stripe), cargos e entrega de conteúdo",
         icon: BookOpen,
         badge: "CASE",
         action: () => {

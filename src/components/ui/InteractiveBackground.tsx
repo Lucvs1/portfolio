@@ -176,7 +176,7 @@ export function InteractiveBackground() {
 
     let lastTime = performance.now();
 
-    // Render Loop a 60 FPS
+    // Render Loop via requestAnimationFrame
     const render = (now: number) => {
       if (!isVisible) return;
 

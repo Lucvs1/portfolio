@@ -2,7 +2,103 @@ const fs = require('fs');
 const path = require('path');
 const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
 
-async function createResume() {
+const resumeData = {
+  pt: {
+    fileName: 'Lucas_Cabral_Curriculo.pdf',
+    titleRole: 'Engenheiro de Software | Full Stack & UI/UX Developer',
+    contact: 'Rio de Janeiro, Brasil  |  lucasbezerracontact0@gmail.com  |  linkedin.com/in/lucas-bezerra-51030b303  |  github.com/Lucvs1',
+    sections: {
+      summaryTitle: 'Resumo Profissional',
+      summary: 'Engenheiro de Software com solida base tecnica forjada no curso tecnico de Automacao Industrial (Firjan SENAI) e graduacao em Engenharia de Software. Especialista no desenvolvimento de aplicacoes web de alta performance e interfaces fluidas com Next.js, TypeScript e GSAP, arquitetura de APIs RESTful e microsservicos assincronos com rigor analitico em tolerancia a falhas.',
+      educationTitle: 'Formacao Academica & Tecnica',
+      edu1: {
+        title: 'Graduacao em Engenharia de Software',
+        meta: 'Anhanguera | Previsao: 2027',
+        desc: 'Enfase em engenharia de requisitos, microsservicos, arquitetura orientada a eventos, seguranca e boas praticas de engenharia de software.',
+      },
+      edu2: {
+        title: 'Tecnico em Automacao Industrial',
+        meta: 'Firjan SENAI | Concluido: 2022',
+        desc: 'Programacao de Controladores Logicos Programaveis (CLP), instrumentacao industrial, redes de comunicacao (Modbus/Ethernet) e controle de processos de missao critica.',
+      },
+      projectsTitle: 'Projetos Selecionados em Producao',
+      p1: {
+        title: 'ROTA BGR (Web Application)',
+        meta: 'Deploy: rotabgr.vercel.app',
+        stack: 'Stack: Next.js (App Router), React, TypeScript, Tailwind CSS, GSAP',
+        desc: 'Aplicacao web interativa para corporacao policial em GTA RP/MTA. Inclui painel administrativo completo, catalogo de viaturas e fardas, hall de Legends e sistema de recrutamento com integracao Discord Webhook e emissao de dossie em PDF.',
+      },
+      p2: {
+        title: 'Cantinho da Cigana (E-commerce Cultural & Leitura Cigana)',
+        meta: 'Deploy: cantinhodacigana.vercel.app',
+        stack: 'Stack: Next.js, React, Tailwind CSS, Design System, UI/UX Mistico',
+        desc: 'Plataforma de comercio eletronico e cultura com foco central no agendamento de leitura de baralho cigano e venda de conteudos tematicos, alcancando excelente pontuacao Core Web Vitals.',
+      },
+      p3: {
+        title: 'Bot Gateway Pro (Bot Discord de Pagamentos & Entregas)',
+        meta: 'GitHub: github.com/Lucvs1',
+        stack: 'Stack: Discord.js, Mercado Pago, Stripe, Node.js, Webhooks Assincronos',
+        desc: 'Bot de Discord para monetizacao nativa com checkout via PIX e Cartao/Cripto. Atribui cargos automaticamente e despacha arquivos e conteudos comprados diretamente aos clientes logo apos o pagamento.',
+      },
+      skillsTitle: 'Arsenal Tecnologico & Competencias',
+      skills: [
+        { cat: 'Front-end & Creative Dev:', list: 'Next.js (App Router), React, TypeScript, Tailwind CSS, GSAP, Lenis Scroll, HTML5/CSS3.' },
+        { cat: 'Back-end & Infraestrutura:', list: 'Node.js, Express, RESTful APIs, MySQL, Docker, Bash/Shell Scripting, Git/GitHub, Vercel.' },
+        { cat: 'Design, UI/UX & Metodologias:', list: 'Figma, Design Systems, Adobe Photoshop, Illustrator, Prototipacao, Microinteracoes, A11y.' },
+      ],
+      footerText: 'Curriculum Vitae • Lucas Bezerra de Menezes Cabral • Engenharia de Software',
+    },
+  },
+  en: {
+    fileName: 'Lucas_Cabral_Resume.pdf',
+    titleRole: 'Software Engineer | Full Stack & UI/UX Developer',
+    contact: 'Rio de Janeiro, Brazil  |  lucasbezerracontact0@gmail.com  |  linkedin.com/in/lucas-bezerra-51030b303  |  github.com/Lucvs1',
+    sections: {
+      summaryTitle: 'Professional Summary',
+      summary: 'Software Engineer with a solid analytical background forged through Industrial Automation technical training (Firjan SENAI) and an ongoing degree in Software Engineering. Specialized in architecting high-performance web applications and fluid interfaces with Next.js, TypeScript, and GSAP, RESTful API architecture, and asynchronous microservices with analytical rigor in fault tolerance.',
+      educationTitle: 'Education & Technical Background',
+      edu1: {
+        title: 'B.S. in Software Engineering',
+        meta: 'Anhanguera | Expected: 2027',
+        desc: 'Emphasis on requirements engineering, microservices, event-driven architecture, cybersecurity, and modern software engineering practices.',
+      },
+      edu2: {
+        title: 'Industrial Automation Technician',
+        meta: 'Firjan SENAI | Completed: 2022',
+        desc: 'Programming of Programmable Logic Controllers (PLC), industrial instrumentation, field communication networks (Modbus/Ethernet), and mission-critical process control.',
+      },
+      projectsTitle: 'Selected Production Projects',
+      p1: {
+        title: 'ROTA BGR (Web Application)',
+        meta: 'Deploy: rotabgr.vercel.app',
+        stack: 'Stack: Next.js (App Router), React, TypeScript, Tailwind CSS, GSAP',
+        desc: 'Interactive web platform for a GTA RP/MTA police department. Features complete admin dashboard, patrol fleet & uniforms catalog, Legends memorial, and recruitment system with Discord Webhook and PDF dossier generation.',
+      },
+      p2: {
+        title: 'Cantinho da Cigana (Cultural E-commerce & Tarot Platform)',
+        meta: 'Deploy: cantinhodacigana.vercel.app',
+        stack: 'Stack: Next.js, React, Tailwind CSS, Design System, Mystical UI/UX',
+        desc: 'Cultural e-commerce and platform focused on Gypsy Tarot readings booking and themed content sales, achieving elite Core Web Vitals scores and conversion-oriented UX.',
+      },
+      p3: {
+        title: 'Bot Gateway Pro (Discord Payments & Delivery Bot)',
+        meta: 'GitHub: github.com/Lucvs1',
+        stack: 'Stack: Discord.js, Mercado Pago, Stripe, Node.js, Async Webhooks',
+        desc: 'Discord bot for in-app monetization with instant PIX and Card/Crypto checkout. Automatically grants server roles and delivers purchased digital files directly to buyers post-sale.',
+      },
+      skillsTitle: 'Technical Arsenal & Competencies',
+      skills: [
+        { cat: 'Front-end & Creative Dev:', list: 'Next.js (App Router), React, TypeScript, Tailwind CSS, GSAP, Lenis Scroll, HTML5/CSS3.' },
+        { cat: 'Back-end & Infrastructure:', list: 'Node.js, Express, RESTful APIs, MySQL, Docker, Bash/Shell Scripting, Git/GitHub, Vercel.' },
+        { cat: 'Design, UI/UX & Methodologies:', list: 'Figma, Design Systems, Adobe Photoshop, Illustrator, Prototyping, Fluid UX, A11y.' },
+      ],
+      footerText: 'Curriculum Vitae • Lucas Bezerra de Menezes Cabral • Software Engineering',
+    },
+  },
+};
+
+async function generateSingleResume(langKey) {
+  const data = resumeData[langKey];
   const pdfDoc = await PDFDocument.create();
   // A4 size: 595.28 x 841.89 points
   const page = pdfDoc.addPage([595.28, 841.89]);
@@ -18,7 +114,6 @@ async function createResume() {
   const secondaryColor = rgb(0.3, 0.35, 0.45); // Slate 600
   const bodyColor = rgb(0.18, 0.22, 0.28); // Slate 800
   const borderColor = rgb(0.85, 0.88, 0.92); // Slate 200
-  const lightBg = rgb(0.96, 0.97, 0.99); // Slate 50
 
   const margin = 40;
   let y = height - 45;
@@ -44,7 +139,7 @@ async function createResume() {
   y -= 18;
 
   // Subtítulo / Especialidade
-  page.drawText('Engenheiro de Software | Full Stack & UI/UX Developer', {
+  page.drawText(data.titleRole, {
     x: margin,
     y: y,
     size: 11,
@@ -55,8 +150,7 @@ async function createResume() {
   y -= 16;
 
   // Dados de Contato e Links
-  const contactText = 'Rio de Janeiro, Brasil  |  lucasbezerracontact0@gmail.com  |  linkedin.com/in/lucas-bezerra-51030b303  |  github.com/Lucvs1';
-  page.drawText(contactText, {
+  page.drawText(data.contact, {
     x: margin,
     y: y,
     size: 8.5,
@@ -117,25 +211,23 @@ async function createResume() {
     }
   }
 
-  // SEÇÃO: RESUMO PROFISSIONAL
-  drawSectionTitle('Resumo Profissional');
-  const summary = 'Engenheiro de Software com solida base tecnica forjada no curso tecnico de Automacao Industrial (Firjan SENAI) e graduacao em Engenharia de Software. Especialista no desenvolvimento de aplicacoes web de alta performance e fidelidade visual em 60 FPS com Next.js, TypeScript e GSAP, arquitetura de APIs RESTful e microsservicos assincronos com rigor analitico em tolerancia a falhas.';
-  drawWrappedText(summary, margin, 8.8, fontRegular, bodyColor, width - margin * 2, 13);
-
+  // 1. RESUMO PROFISSIONAL
+  drawSectionTitle(data.sections.summaryTitle);
+  drawWrappedText(data.sections.summary, margin, 8.8, fontRegular, bodyColor, width - margin * 2, 13);
   y -= 10;
 
-  // SEÇÃO: FORMAÇÃO ACADÊMICA & TÉCNICA
-  drawSectionTitle('Formacao Academica & Tecnica');
+  // 2. FORMAÇÃO ACADÊMICA & TÉCNICA
+  drawSectionTitle(data.sections.educationTitle);
 
-  // Anhanguera
-  page.drawText('Graduacao em Engenharia de Software', {
+  // Edu 1
+  page.drawText(data.sections.edu1.title, {
     x: margin,
     y: y,
     size: 9.5,
     font: fontBold,
     color: primaryColor,
   });
-  page.drawText('Anhanguera | Previsao: 2027', {
+  page.drawText(data.sections.edu1.meta, {
     x: width - margin - 150,
     y: y,
     size: 8.5,
@@ -143,19 +235,18 @@ async function createResume() {
     color: secondaryColor,
   });
   y -= 13;
-  drawWrappedText('Enfase em engenharia de requisitos, microsservicos, arquitetura orientada a eventos, seguranca e boas praticas de engenharia de software.', margin + 8, 8.5, fontRegular, secondaryColor, width - margin * 2 - 8, 12);
-
+  drawWrappedText(data.sections.edu1.desc, margin + 8, 8.5, fontRegular, secondaryColor, width - margin * 2 - 8, 12);
   y -= 6;
 
-  // SENAI
-  page.drawText('Tecnico em Automacao Industrial', {
+  // Edu 2
+  page.drawText(data.sections.edu2.title, {
     x: margin,
     y: y,
     size: 9.5,
     font: fontBold,
     color: primaryColor,
   });
-  page.drawText('Firjan SENAI | Concluido: 2022', {
+  page.drawText(data.sections.edu2.meta, {
     x: width - margin - 150,
     y: y,
     size: 8.5,
@@ -163,22 +254,21 @@ async function createResume() {
     color: secondaryColor,
   });
   y -= 13;
-  drawWrappedText('Programacao de Controladores Logicos Programaveis (CLP), instrumentacao industrial, redes de comunicacao (Modbus/Ethernet) e controle de processos de missao critica.', margin + 8, 8.5, fontRegular, secondaryColor, width - margin * 2 - 8, 12);
-
+  drawWrappedText(data.sections.edu2.desc, margin + 8, 8.5, fontRegular, secondaryColor, width - margin * 2 - 8, 12);
   y -= 10;
 
-  // SEÇÃO: PROJETOS SELECIONADOS EM PRODUÇÃO
-  drawSectionTitle('Projetos Selecionados em Producao');
+  // 3. PROJETOS SELECIONADOS EM PRODUÇÃO
+  drawSectionTitle(data.sections.projectsTitle);
 
-  // Projeto 1
-  page.drawText('ROTA BGR (Web Application)', {
+  // P1 - ROTA BGR
+  page.drawText(data.sections.p1.title, {
     x: margin,
     y: y,
     size: 9.5,
     font: fontBold,
     color: primaryColor,
   });
-  page.drawText('Deploy: rotabgr.vercel.app', {
+  page.drawText(data.sections.p1.meta, {
     x: width - margin - 150,
     y: y,
     size: 8.5,
@@ -186,7 +276,7 @@ async function createResume() {
     color: emeraldColor,
   });
   y -= 12;
-  page.drawText('Stack: Next.js (App Router), React, TypeScript, Tailwind CSS, GSAP Animations', {
+  page.drawText(data.sections.p1.stack, {
     x: margin + 8,
     y: y,
     size: 8,
@@ -194,19 +284,18 @@ async function createResume() {
     color: secondaryColor,
   });
   y -= 12;
-  drawWrappedText('Plataforma web interativa de alta performance voltada para comunidade e operacoes. Mantem 99.98% de uptime, renderizacao estavel a 60 FPS e latencia inferior a 25ms.', margin + 8, 8.5, fontRegular, bodyColor, width - margin * 2 - 8, 12);
-
+  drawWrappedText(data.sections.p1.desc, margin + 8, 8.5, fontRegular, bodyColor, width - margin * 2 - 8, 12);
   y -= 6;
 
-  // Projeto 2
-  page.drawText('Cantinho da Cigana (E-commerce)', {
+  // P2 - Cantinho da Cigana
+  page.drawText(data.sections.p2.title, {
     x: margin,
     y: y,
     size: 9.5,
     font: fontBold,
     color: primaryColor,
   });
-  page.drawText('Deploy: cantinhodacigana.vercel.app', {
+  page.drawText(data.sections.p2.meta, {
     x: width - margin - 150,
     y: y,
     size: 8.5,
@@ -214,7 +303,7 @@ async function createResume() {
     color: emeraldColor,
   });
   y -= 12;
-  page.drawText('Stack: React, Next.js, Modern CSS, Design System, UI/UX de Alta Conversao', {
+  page.drawText(data.sections.p2.stack, {
     x: margin + 8,
     y: y,
     size: 8,
@@ -222,19 +311,18 @@ async function createResume() {
     color: secondaryColor,
   });
   y -= 12;
-  drawWrappedText('Plataforma de comercio eletronico completa com catalogo responsivo de produtos, navegacao fluida e arquitetura orientada a taxas elevadas de conversao.', margin + 8, 8.5, fontRegular, bodyColor, width - margin * 2 - 8, 12);
-
+  drawWrappedText(data.sections.p2.desc, margin + 8, 8.5, fontRegular, bodyColor, width - margin * 2 - 8, 12);
   y -= 6;
 
-  // Projeto 3
-  page.drawText('Bot Gateway Pro (Microsservico de Backend & Webhooks)', {
+  // P3 - Bot Gateway Pro
+  page.drawText(data.sections.p3.title, {
     x: margin,
     y: y,
     size: 9.5,
     font: fontBold,
     color: primaryColor,
   });
-  page.drawText('GitHub: github.com/Lucvs1', {
+  page.drawText(data.sections.p3.meta, {
     x: width - margin - 150,
     y: y,
     size: 8.5,
@@ -242,7 +330,7 @@ async function createResume() {
     color: emeraldColor,
   });
   y -= 12;
-  page.drawText('Stack: Node.js, Express, Docker, RESTful Architecture, Pipelines Assincronos', {
+  page.drawText(data.sections.p3.stack, {
     x: margin + 8,
     y: y,
     size: 8,
@@ -250,20 +338,13 @@ async function createResume() {
     color: secondaryColor,
   });
   y -= 12;
-  drawWrappedText('Engine assincrona de alta vazao para ingestao, roteamento e despacho de mensagens e webhooks corporativos, com latencia de processamento inferior a 1.5ms.', margin + 8, 8.5, fontRegular, bodyColor, width - margin * 2 - 8, 12);
-
+  drawWrappedText(data.sections.p3.desc, margin + 8, 8.5, fontRegular, bodyColor, width - margin * 2 - 8, 12);
   y -= 10;
 
-  // SEÇÃO: ARSENAL DE TECNOLOGIAS
-  drawSectionTitle('Arsenal Tecnologico & Competencias');
+  // 4. ARSENAL DE TECNOLOGIAS
+  drawSectionTitle(data.sections.skillsTitle);
 
-  const skills = [
-    { cat: 'Front-end & Creative Dev:', list: 'Next.js (App Router), React, TypeScript, Tailwind CSS, GSAP, Lenis Scroll, HTML5/CSS3.' },
-    { cat: 'Back-end & Infraestrutura:', list: 'Node.js, Express, RESTful APIs, MySQL, Docker, Bash/Shell Scripting, Git/GitHub, Vercel.' },
-    { cat: 'Design, UI/UX & Metodologias:', list: 'Figma, Design Systems, Adobe Photoshop, Illustrator, Prototipacao, Microinteracoes, A11y.' },
-  ];
-
-  skills.forEach(s => {
+  data.sections.skills.forEach(s => {
     page.drawText(s.cat, {
       x: margin,
       y: y,
@@ -289,7 +370,7 @@ async function createResume() {
     color: borderColor,
   });
 
-  page.drawText('Curriculum Vitae • Lucas Bezerra de Menezes Cabral • Engenharia de Software', {
+  page.drawText(data.sections.footerText, {
     x: margin,
     y: 24,
     size: 7.5,
@@ -306,9 +387,14 @@ async function createResume() {
   });
 
   const pdfBytes = await pdfDoc.save();
-  const outPath = path.join(__dirname, '..', 'public', 'Lucas_Cabral_Curriculo.pdf');
+  const outPath = path.join(__dirname, '..', 'public', data.fileName);
   fs.writeFileSync(outPath, pdfBytes);
-  console.log('PDF gerado com sucesso em:', outPath);
+  console.log(`[${langKey.toUpperCase()}] PDF gerado com sucesso em: ${outPath} (y final restante: ${Math.round(y)})`);
 }
 
-createResume().catch(console.error);
+async function main() {
+  await generateSingleResume('pt');
+  await generateSingleResume('en');
+}
+
+main().catch(console.error);
