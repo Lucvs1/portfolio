@@ -14,6 +14,7 @@ import { Preloader } from "@/components/ui/Preloader";
 import { InteractiveBackground } from "@/components/ui/InteractiveBackground";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { LanguageProvider } from "@/lib/i18n";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -118,6 +119,7 @@ export default function RootLayout({
             <InteractiveBackground />
             <CircuitScrollLine />
             <Navbar />
+            <SpeedInsights/>
             <main className="flex-1 relative z-10">{children}</main>
             <Footer />
             <SoundToggle />
