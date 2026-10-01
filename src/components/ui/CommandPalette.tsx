@@ -17,10 +17,15 @@ import {
   FileCode2,
   FileText,
   RotateCcw,
+  Globe,
+  BookOpen,
+  Gauge,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { openResumeModal } from "@/components/ui/ResumeModal";
 import { rebootPortfolio } from "@/components/ui/Preloader";
+import { openCaseStudyModal } from "@/components/ui/CaseStudyModal";
+import { useI18n } from "@/lib/i18n";
 
 export type ThemeGlow = "emerald" | "cyan" | "violet" | "mono";
 
@@ -100,6 +105,7 @@ interface CommandItem {
 }
 
 export function CommandPalette() {
+  const { language, toggleLanguage } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -309,6 +315,68 @@ export function CommandPalette() {
         },
       },
       {
+        id: "cli-toggle-lang",
+        category: "Comandos Dev",
+        label: language === "pt" ? "Alternar Idioma para Inglês (EN)" : "Switch Language to Portuguese (PT)",
+        detail: language === "pt" ? "Muda instantaneamente todo o conteúdo para Inglês" : "Translate the entire portfolio to Portuguese",
+        icon: Globe,
+        badge: language.toUpperCase(),
+        action: () => {
+          sound.playSuccess();
+          toggleLanguage();
+          closePalette();
+        },
+      },
+      {
+        id: "cli-open-simulator",
+        category: "Comandos Dev",
+        label: "lucas --simulator",
+        detail: "Abrir o Simulador de CLP (LC-8000) no Sobre",
+        icon: Gauge,
+        badge: "SENAI",
+        action: () => {
+          sound.playSuccess();
+          closePalette();
+          scrollTo("#about", { offset: -30, duration: 1 });
+        },
+      },
+      {
+        id: "cli-cs-rota-bgr",
+        category: "Comandos Dev",
+        label: "Case Study: ROTA BGR",
+        detail: "Arquitetura Mapbox WebGL, Server Components e telemetria",
+        icon: BookOpen,
+        badge: "CASE",
+        action: () => {
+          closePalette();
+          openCaseStudyModal("rota-bgr");
+        },
+      },
+      {
+        id: "cli-cs-cigana",
+        category: "Comandos Dev",
+        label: "Case Study: Cantinho da Cigana",
+        detail: "E-Commerce de alta fidelidade, PageSpeed 98+ e branding",
+        icon: BookOpen,
+        badge: "CASE",
+        action: () => {
+          closePalette();
+          openCaseStudyModal("cantinho-da-cigana");
+        },
+      },
+      {
+        id: "cli-cs-bot",
+        category: "Comandos Dev",
+        label: "Case Study: Bot Gateway Pro",
+        detail: "Throughput de 10k webhooks/min, Docker e Circuit Breaker",
+        icon: BookOpen,
+        badge: "CASE",
+        action: () => {
+          closePalette();
+          openCaseStudyModal("bot-gateway-pro");
+        },
+      },
+      {
         id: "cli-reboot",
         category: "Comandos Dev",
         label: "lucas --reboot",
@@ -400,7 +468,7 @@ export function CommandPalette() {
         },
       },
     ],
-    [scrollTo, activeTheme, closePalette, copyEmail, simulateResumeCurl]
+    [scrollTo, activeTheme, closePalette, copyEmail, simulateResumeCurl, language, toggleLanguage]
   );
 
   const filtered = useMemo(() => {

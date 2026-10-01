@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { Code2, Server, Palette, CheckCircle2, Wrench } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 const SKILL_GROUPS = [
   {
@@ -56,6 +57,7 @@ const SKILL_GROUPS = [
 ];
 
 export function SkillsSection() {
+  const { t } = useI18n();
   const sectionRef = useRef<HTMLElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -95,13 +97,13 @@ export function SkillsSection() {
       <div className="flex flex-col items-start mb-16">
         <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 flex items-center gap-2">
           <Wrench className="w-4 h-4" />
-          [03 // Habilidades Técnicas]
+          {t.skills.badge}
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
-          Arsenal Tecnológico & Design
+          {t.skills.title}
         </h2>
         <p className="mt-4 text-zinc-400 max-w-2xl text-base sm:text-lg leading-relaxed">
-          Conjunto de ferramentas e linguagens utilizadas para projetar e implementar sistemas ponta a ponta.
+          {t.skills.subtitle}
         </p>
       </div>
 

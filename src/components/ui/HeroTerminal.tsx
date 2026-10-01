@@ -5,6 +5,8 @@ import { sound } from "@/lib/sound";
 import { openResumeModal } from "@/components/ui/ResumeModal";
 import { rebootPortfolio } from "@/components/ui/Preloader";
 import { changeTheme, ThemeGlow } from "@/components/ui/CommandPalette";
+import { openCaseStudyModal } from "@/components/ui/CaseStudyModal";
+import { useI18n } from "@/lib/i18n";
 import {
   Terminal as TerminalIcon,
   Maximize2,
@@ -28,6 +30,9 @@ const COMMAND_LIST = [
   "bio",
   "skills",
   "projects",
+  "casestudy",
+  "simulator",
+  "lang",
   "open",
   "resume",
   "contact",
@@ -47,6 +52,7 @@ export function HeroTerminal({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const { language, setLanguage, toggleLanguage } = useI18n();
   const [inputVal, setInputVal] = useState("");
   const [history, setHistory] = useState<HistoryItem[]>([
     {
@@ -392,6 +398,55 @@ export function HeroTerminal({
           isError = true;
           sound.playError();
         }
+        break;
+      }
+
+      case "casestudy":
+      case "cs": {
+        const target = args[0]?.toLowerCase();
+        if (target === "1" || target === "rotabgr") {
+          openCaseStudyModal("rota-bgr");
+          output = <span className="text-emerald-400">✓ Abrindo Case Study: ROTA BGR...</span>;
+        } else if (target === "2" || target === "cantinho" || target === "cigana") {
+          openCaseStudyModal("cantinho-da-cigana");
+          output = <span className="text-emerald-400">✓ Abrindo Case Study: Cantinho da Cigana...</span>;
+        } else if (target === "3" || target === "bot" || target === "gateway") {
+          openCaseStudyModal("bot-gateway-pro");
+          output = <span className="text-emerald-400">✓ Abrindo Case Study: Bot Gateway Pro...</span>;
+        } else {
+          output = <span className="text-amber-400">Uso: casestudy &lt;1 | 2 | 3&gt; (Ex: casestudy 1)</span>;
+        }
+        sound.playSuccess();
+        break;
+      }
+
+      case "simulator":
+      case "clp": {
+        const aboutEl = document.getElementById("about");
+        if (aboutEl) aboutEl.scrollIntoView({ behavior: "smooth" });
+        output = <span className="text-emerald-400">✓ Navegando até a seção Sobre Mim. Inicie o simulador de CLP no painel interativo.</span>;
+        sound.playSuccess();
+        break;
+      }
+
+      case "lang":
+      case "language": {
+        const choice = args[0]?.toLowerCase();
+        if (choice === "en") {
+          setLanguage("en");
+          output = <span className="text-emerald-400">✓ Language switched to English (EN).</span>;
+        } else if (choice === "pt") {
+          setLanguage("pt");
+          output = <span className="text-emerald-400">✓ Idioma alterado para Português (PT).</span>;
+        } else {
+          toggleLanguage();
+          output = (
+            <span className="text-emerald-400">
+              ✓ Idioma alternado para: <strong className="uppercase">{language === "pt" ? "EN" : "PT"}</strong>
+            </span>
+          );
+        }
+        sound.playSuccess();
         break;
       }
 
@@ -769,6 +824,9 @@ export function HeroTerminal({
             { label: "bio", cmd: "bio" },
             { label: "skills", cmd: "skills" },
             { label: "projects", cmd: "projects" },
+            { label: "simulator", cmd: "simulator" },
+            { label: "casestudy 1", cmd: "casestudy 1" },
+            { label: "lang en", cmd: "lang en" },
             { label: "resume", cmd: "resume" },
             { label: "ping rotabgr", cmd: "ping rotabgr.com.br" },
             { label: "theme cyan", cmd: "theme cyan" },

@@ -3,56 +3,10 @@
 import React, { useState } from "react";
 import { Cpu, Server, Layout, ArrowRight, Activity, Zap, CheckCircle2 } from "lucide-react";
 import { sound } from "@/lib/sound";
-
-interface Stage {
-  id: string;
-  name: string;
-  subtitle: string;
-  icon: React.ComponentType<{ className?: string }>;
-  accentColor: string;
-  borderColor: string;
-  badgeBg: string;
-  telemetry: { label: string; value: string };
-  specs: string[];
-}
-
-const STAGES: Stage[] = [
-  {
-    id: "industrial",
-    name: "Chão de Fábrica & CLP",
-    subtitle: "Base Firjan SENAI (2022)",
-    icon: Cpu,
-    accentColor: "text-amber-400",
-    borderColor: "border-amber-500/30 hover:border-amber-500/60",
-    badgeBg: "bg-amber-950/40 text-amber-300 border-amber-500/30",
-    telemetry: { label: "Sinal I/O", value: "4-20mA Estável" },
-    specs: ["Modbus / Redes Industriais", "Lógica Ladder & Automação", "Tolerância Zero a Falhas"],
-  },
-  {
-    id: "backend",
-    name: "Gateway API & Broker",
-    subtitle: "Node.js & Infraestrutura",
-    icon: Server,
-    accentColor: "text-cyan-400",
-    borderColor: "border-cyan-500/30 hover:border-cyan-500/60",
-    badgeBg: "bg-cyan-950/40 text-cyan-300 border-cyan-500/30",
-    telemetry: { label: "Throughput", value: "< 1.5ms Latência" },
-    specs: ["Pipelines Assíncronos", "Orquestração Docker", "APIs RESTful Escaláveis"],
-  },
-  {
-    id: "frontend",
-    name: "Interface Reativa 60 FPS",
-    subtitle: "Next.js 16 & Creative Dev",
-    icon: Layout,
-    accentColor: "text-emerald-400",
-    borderColor: "border-emerald-500/30 hover:border-emerald-500/60",
-    badgeBg: "bg-emerald-950/40 text-emerald-300 border-emerald-500/30",
-    telemetry: { label: "Taxa de Quadro", value: "60 FPS Custo Zero" },
-    specs: ["GSAP + Lenis Smooth", "Design System & Figma", "Acessibilidade & Micro-UX"],
-  },
-];
+import { useI18n } from "@/lib/i18n";
 
 export function AutomationFlowVisualizer() {
+  const { t } = useI18n();
   const [activeStage, setActiveStage] = useState<string>("backend");
 
   const handleStageClick = (id: string) => {
@@ -60,8 +14,53 @@ export function AutomationFlowVisualizer() {
     setActiveStage(id);
   };
 
+  const stages = [
+    {
+      id: "industrial",
+      name: t.about.stage1Name,
+      subtitle: t.about.stage1Subtitle,
+      icon: Cpu,
+      accentColor: "text-amber-400",
+      borderColor: "border-amber-500/30 hover:border-amber-500/60",
+      badgeBg: "bg-amber-950/40 text-amber-300 border-amber-500/30",
+      telemetry: {
+        label: t.about.stage1TelemetryLabel,
+        value: t.about.stage1TelemetryValue,
+      },
+      specs: t.about.stage1Specs,
+    },
+    {
+      id: "backend",
+      name: t.about.stage2Name,
+      subtitle: t.about.stage2Subtitle,
+      icon: Server,
+      accentColor: "text-cyan-400",
+      borderColor: "border-cyan-500/30 hover:border-cyan-500/60",
+      badgeBg: "bg-cyan-950/40 text-cyan-300 border-cyan-500/30",
+      telemetry: {
+        label: t.about.stage2TelemetryLabel,
+        value: t.about.stage2TelemetryValue,
+      },
+      specs: t.about.stage2Specs,
+    },
+    {
+      id: "frontend",
+      name: t.about.stage3Name,
+      subtitle: t.about.stage3Subtitle,
+      icon: Layout,
+      accentColor: "text-emerald-400",
+      borderColor: "border-emerald-500/30 hover:border-emerald-500/60",
+      badgeBg: "bg-emerald-950/40 text-emerald-300 border-emerald-500/30",
+      telemetry: {
+        label: t.about.stage3TelemetryLabel,
+        value: t.about.stage3TelemetryValue,
+      },
+      specs: t.about.stage3Specs,
+    },
+  ];
+
   return (
-    <div className="relative mt-16 rounded-3xl bg-zinc-950/80 border border-white/10 p-6 sm:p-10 overflow-hidden backdrop-blur-2xl shadow-2xl">
+    <div className="relative mt-8 rounded-3xl bg-zinc-950/80 border border-white/10 p-6 sm:p-10 overflow-hidden backdrop-blur-2xl shadow-2xl">
       {/* Luz ambiente de circuito integrado */}
       <div
         aria-hidden="true"
@@ -72,22 +71,22 @@ export function AutomationFlowVisualizer() {
         <div>
           <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400 flex items-center gap-2 mb-1.5">
             <Activity className="w-3.5 h-3.5 animate-pulse" />
-            [Pipeline Integrado • Engenharia de Automação ➔ Nuvem]
+            {t.about.flowBadge}
           </span>
           <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-            Da Instrumentação de Campo à Experiência Digital Reativa
+            {t.about.flowTitle}
           </h3>
         </div>
 
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-white/10 text-xs font-mono text-zinc-300">
           <Zap className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Status do Pipeline: Ativo</span>
+          <span>{t.about.pipelineStatus}</span>
         </div>
       </div>
 
       {/* Grid das 3 Etapas com Conectores Animados */}
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-        {STAGES.map((stage, idx) => {
+        {stages.map((stage, idx) => {
           const Icon = stage.icon;
           const isSelected = activeStage === stage.id;
 
@@ -108,7 +107,7 @@ export function AutomationFlowVisualizer() {
                     <Icon className={`w-5 h-5 ${stage.accentColor}`} />
                   </div>
                   <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border ${stage.badgeBg}`}>
-                    0{idx + 1} • ETAPA
+                    0{idx + 1} • {t.about.stageLabel}
                   </span>
                 </div>
 
@@ -144,17 +143,17 @@ export function AutomationFlowVisualizer() {
 
       {/* Trilha de Conexão Inferior demonstrando o fluxo contínuo de dados */}
       <div className="relative mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-400">
-        <div className="flex items-center gap-2">
-          <span className="text-emerald-400 font-bold">FLUXO ARQUITETURAL:</span>
-          <span>Sinais Físicos</span>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-emerald-400 font-bold">{t.about.flowTrailLabel}</span>
+          <span>{t.about.flowTrailStep1}</span>
           <ArrowRight className="w-3.5 h-3.5 text-zinc-600" />
-          <span>Gateway Assíncrono</span>
+          <span>{t.about.flowTrailStep2}</span>
           <ArrowRight className="w-3.5 h-3.5 text-zinc-600" />
-          <span>Interface Web 60 FPS</span>
+          <span>{t.about.flowTrailStep3}</span>
         </div>
 
         <span className="text-[11px] text-zinc-500">
-          Engenharia de precisão com experiência do usuário em nível global
+          {t.about.flowTrailFooter}
         </span>
       </div>
     </div>

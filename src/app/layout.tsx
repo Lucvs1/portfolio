@@ -9,8 +9,11 @@ import { SoundToggle } from "@/components/ui/SoundToggle";
 import { CircuitScrollLine } from "@/components/ui/CircuitScrollLine";
 import { CommandPalette } from "@/components/ui/CommandPalette";
 import { ResumeModal } from "@/components/ui/ResumeModal";
+import { CaseStudyModal } from "@/components/ui/CaseStudyModal";
 import { Preloader } from "@/components/ui/Preloader";
+import { InteractiveBackground } from "@/components/ui/InteractiveBackground";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { LanguageProvider } from "@/lib/i18n";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -110,15 +113,19 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100 selection:bg-emerald-500/30 selection:text-white">
         <JsonLd />
         <SmoothScrollProvider>
-          <Preloader />
-          <CircuitScrollLine />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <SoundToggle />
-          <CommandPalette />
-          <ResumeModal />
-          <CustomCursor />
+          <LanguageProvider>
+            <Preloader />
+            <InteractiveBackground />
+            <CircuitScrollLine />
+            <Navbar />
+            <main className="flex-1 relative z-10">{children}</main>
+            <Footer />
+            <SoundToggle />
+            <CommandPalette />
+            <ResumeModal />
+            <CaseStudyModal />
+            <CustomCursor />
+          </LanguageProvider>
         </SmoothScrollProvider>
       </body>
     </html>

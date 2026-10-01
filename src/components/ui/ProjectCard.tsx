@@ -2,9 +2,12 @@
 
 import React, { useRef, useEffect } from "react";
 import { gsap } from "@/lib/gsap";
-import { ArrowUpRight, CheckCircle2, Cpu, Globe, ShoppingBag, Terminal } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Cpu, Globe, ShoppingBag, Terminal, BookOpen } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { openCaseStudyModal } from "@/components/ui/CaseStudyModal";
+import { sound } from "@/lib/sound";
+import { useI18n } from "@/lib/i18n";
 
 export interface ProjectData {
   id: string;
@@ -26,6 +29,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
+  const { t } = useI18n();
   const cardRef = useRef<HTMLElement | null>(null);
   const mockupRef = useRef<HTMLDivElement | null>(null);
 
@@ -140,7 +144,19 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             ))}
           </div>
 
-          <div className="flex items-center gap-4 pt-4">
+          <div className="flex flex-wrap items-center gap-3 pt-4">
+            <MagneticButton
+              onClick={() => {
+                sound.playClick();
+                openCaseStudyModal(project.id);
+              }}
+              strength={0.2}
+              className="px-5 py-3 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-semibold text-xs tracking-wider uppercase transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/5 cursor-pointer"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
+              <span>{t.projects.viewCaseStudy}</span>
+            </MagneticButton>
+
             {project.liveUrl && (
               <MagneticButton
                 asAnchor
@@ -148,9 +164,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 strength={0.2}
-                className="px-6 py-3 rounded-full bg-white text-zinc-950 font-semibold text-xs tracking-wider uppercase hover:bg-zinc-200 transition-all flex items-center gap-2 shadow-lg shadow-white/5"
+                className="px-5 py-3 rounded-full bg-white text-zinc-950 font-semibold text-xs tracking-wider uppercase hover:bg-zinc-200 transition-all flex items-center gap-2 shadow-lg shadow-white/5"
               >
-                <span>Acessar Plataforma</span>
+                <span>{t.projects.accessPlatform}</span>
                 <ArrowUpRight className="w-4 h-4" />
               </MagneticButton>
             )}
@@ -162,10 +178,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 strength={0.2}
-                className="px-6 py-3 rounded-full bg-zinc-800/90 border border-white/15 text-white font-semibold text-xs tracking-wider uppercase hover:bg-zinc-700 transition-all flex items-center gap-2"
+                className="px-5 py-3 rounded-full bg-zinc-800/90 border border-white/15 text-white font-semibold text-xs tracking-wider uppercase hover:bg-zinc-700 transition-all flex items-center gap-2"
               >
                 <GithubIcon className="w-4 h-4" />
-                <span>Repositório</span>
+                <span>{t.projects.repository}</span>
               </MagneticButton>
             )}
           </div>

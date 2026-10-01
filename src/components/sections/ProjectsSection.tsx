@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { Layers } from "lucide-react";
 import { ProjectCard, type ProjectData } from "@/components/ui/ProjectCard";
+import { useI18n } from "@/lib/i18n";
 
 const PROJECTS: ProjectData[] = [
   {
@@ -51,6 +52,7 @@ const PROJECTS: ProjectData[] = [
 ];
 
 export function ProjectsSection() {
+  const { t } = useI18n();
   const sectionRef = useRef<HTMLElement | null>(null);
   const cardsRef = useRef<HTMLDivElement | null>(null);
 
@@ -92,14 +94,14 @@ export function ProjectsSection() {
         <div>
           <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3 flex items-center gap-2">
             <Layers className="w-4 h-4" />
-            [02 // Trabalhos Selecionados]
+            {t.projects.badge}
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
-            Projetos em Produção
+            {t.projects.title}
           </h2>
         </div>
         <p className="text-zinc-400 max-w-md text-sm sm:text-base leading-relaxed">
-          Aplicações reais em produção, demonstrando flexibilidade desde plataformas de comunidade e comércio eletrônico até arquiteturas assíncronas no backend.
+          {t.projects.subtitle}
         </p>
       </div>
 
